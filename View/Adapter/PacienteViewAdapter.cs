@@ -11,11 +11,11 @@ namespace View.Adapter
 {
     public class PacienteViewAdapter : StackPanelAdapter
     {
-        public List<Paciente> Dataset { get; set; }
+        public List<Paciente>   Dataset { get; set; }
 
 
 
-        public PacienteViewAdapter(StackPanel container) : base(container) { }
+        public PacienteViewAdapter(Window owner, StackPanel container) : base(owner, container) { }
 
 
 

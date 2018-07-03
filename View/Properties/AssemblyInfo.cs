@@ -8,12 +8,12 @@ using System.Windows;
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
 [assembly: AssemblyTitle("Hospital Infantil")]
-[assembly: AssemblyDescription("Hospital Infantil - Nossa Senhora do Perpétuo Socorro")]
+[assembly: AssemblyDescription("Gerenciados de pacientes")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Light Spark")]
+[assembly: AssemblyCompany("LightSpark")]
 [assembly: AssemblyProduct("AppHospital")]
 [assembly: AssemblyCopyright("Copyright © 2018")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Felipe Sousa")]
 [assembly: AssemblyCulture("")]
 
 // Definir ComVisible como false torna os tipos neste assembly invisíveis

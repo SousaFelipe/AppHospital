@@ -9,13 +9,13 @@ namespace Data
 {
     public class PacienteData : Conexao
     {
-        public List<Paciente> ListarPorTrecho(string trecho)
+        public List<Paciente> Listar()
         {
             using (MyConnection = new MySqlConnection(ConnectionString))
             {
                 MyConnection.Open();
 
-                using (MyCommand = new MySqlCommand("SELECT * FROM pacientes WHERE nome LIKE '" + trecho + "%'", MyConnection))
+                using (MyCommand = new MySqlCommand("SELECT * FROM pacientes;", MyConnection))
                 {
                     using (MyReader = MyCommand.ExecuteReader())
                     {
@@ -38,16 +38,14 @@ namespace Data
 
 
 
-        public List<Paciente> ListarComLimite(int limite)
+        public List<Paciente> Filtar(string nome)
         {
             using (MyConnection = new MySqlConnection(ConnectionString))
             {
                 MyConnection.Open();
 
-                using (MyCommand = new MySqlCommand("SELECT * FROM pacientes ORDER BY nome ASC LIMIT @limite", MyConnection))
+                using (MyCommand = new MySqlCommand("SELECT * FROM pacientes WHERE nome LIKE '" + nome + "%'", MyConnection))
                 {
-                    MyCommand.Parameters.AddWithValue("@limite", limite);
-
                     using (MyReader = MyCommand.ExecuteReader())
                     {
                         List<Paciente> pacientes = new List<Paciente>();
@@ -57,14 +55,46 @@ namespace Data
                             pacientes.Add(new Content().Get(MyReader));
                         }
 
-                        MyConnection.Close();
-                        MyCommand.Dispose();
                         MyReader.Close();
+                        MyCommand.Dispose();
+                        MyConnection.Close();
 
                         return pacientes;
                     }
                 }
             }
+        }
+
+
+
+        public Paciente Buscar(string[] colunas, string[] valores)
+        {
+            try
+            {
+                using (MyConnection = new MySqlConnection(ConnectionString))
+                {
+                    MyConnection.Open();
+
+                    using (MyCommand = new MySqlCommand(RawSelect("pacientes", colunas, valores), MyConnection))
+                    {
+                        using (MyReader = MyCommand.ExecuteReader())
+                        {
+                            if (MyReader.Read())
+                            {
+                                return new Content().Get(MyReader);
+                            }
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                MyConnection.Close();
+                MyCommand.Dispose();
+                MyReader.Close();
+            }
+
+            return null;
         }
 
 
@@ -103,38 +133,6 @@ namespace Data
                 MyConnection.Clone();
                 MyCommand.Dispose();
             }
-        }
-
-
-
-        public Paciente Buscar(string[] colunas, string[] valores)
-        {
-            try
-            {
-                using (MyConnection = new MySqlConnection(ConnectionString))
-                {
-                    MyConnection.Open();
-
-                    using (MyCommand = new MySqlCommand(RawSelect("pacientes", colunas, valores), MyConnection))
-                    {
-                        using (MyReader = MyCommand.ExecuteReader())
-                        {
-                            if (MyReader.Read())
-                            {
-                                return new Content().Get(MyReader);
-                            }
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                MyConnection.Close();
-                MyCommand.Dispose();
-                MyReader.Close();
-            }
-
-            return null;
         }
 
 

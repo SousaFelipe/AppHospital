@@ -55,6 +55,10 @@ namespace View.Components
         private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Item = new PacienteController().Buscar(new string[] { "nome" }, new string[] { tbk_nome.Text });
+
+            PacienteDialog dialog = new PacienteDialog(Adapter.Owner);
+            dialog.CarregarPaciente(Item.ID);
+            dialog.Show();
         }
     }
 }

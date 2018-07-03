@@ -6,20 +6,15 @@ namespace View.Adapter
 {
     public abstract class StackPanelAdapter
     {
-        public StackPanel Container { get; private set; }
+        public Window       Owner { get; private set; }
+        public StackPanel   Container { get; private set; }
 
 
 
-        protected StackPanelAdapter(StackPanel container)
+        protected StackPanelAdapter(Window owner, StackPanel container)
         {
-            if (container != null)
-            {
-                Container = container;
-            }
-            else
-            {
-                throw new Exception("O objeto do tipo 'StackPanel' está nulo!");
-            }
+            Owner = owner;
+            Container = container;
         }
 
 

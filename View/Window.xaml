@@ -224,20 +224,19 @@
             Height="160" VerticalAlignment="Top">
 
             <materialDesign:Card
-                x:Name="fab_novo_paciente"
                 UniformCornerRadius="32"
                 Width="64" Height="64"
                 VerticalAlignment="Center"
                 materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
                 <Grid
+                    x:Name="fab_novo_paciente"
                     Cursor="Hand"
                     VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch">
-                    
-                    <Grid.Background>
-                        <SolidColorBrush Color="#FF4081"/>
-                    </Grid.Background>
+                    HorizontalAlignment="Stretch"
+                    Background="#FF4081"
+                    MouseLeftButtonDown="FabNovoPaciente_MouseLeftButtonDown"
+                    MouseLeftButtonUp="FabNovoPaciente_MouseLeftButtonUp">
 
                     <Image
                         Width="24" Height="24"

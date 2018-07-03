@@ -8,6 +8,20 @@ namespace Controller
 {
     public class PacienteController
     {
+        public List<Paciente> Listar(string nome)
+        {
+            if (string.IsNullOrEmpty(nome))
+            {
+                return new PacienteData().Listar();
+            }
+            else
+            {
+                return new PacienteData().Filtar(nome);
+            }
+        }
+
+
+
         public Paciente Buscar(string[] colunas, string[] valores)
         {
             return new PacienteData().Buscar(colunas, valores);
@@ -15,15 +29,101 @@ namespace Controller
 
 
 
-        public List<Paciente> Listar(string trecho)
+        public string Inserir(Paciente paciente)
         {
-            if (string.IsNullOrEmpty(trecho))
+            if (paciente != null)
             {
-                return new PacienteData().ListarPorTrecho(trecho);
+                if (ExistemCamposVazios(paciente))
+                {
+                    return "Alguns campos importantes não foram preenchidos!";
+                }
+                else
+                {
+                    return new PacienteData().Inserir(paciente);
+                }
+            }
+
+            return "O objeto do tipo \"Paciente\" está nulo!";
+        }
+
+
+
+        public string Remover(int id)
+        {
+            if (id > 0)
+            {
+                return new PacienteData().Remover(id);
+            }
+
+            return "Não foi possível encontrar esse paciente!";
+        }
+
+
+
+        public bool ExistemCamposVazios(Paciente paciente)
+        {
+            if (string.IsNullOrEmpty(paciente.Nome))
+                return true;
+
+            if (string.IsNullOrEmpty(paciente.DataNascimento.ToString("dd/MM/yyyy")))
+                return true;
+
+            if (string.IsNullOrEmpty(paciente.CartaoSus))
+                return true;
+
+            if (paciente.Sexo < 0)
+                return true;
+
+            if (string.IsNullOrEmpty(paciente.Responsavel))
+                return true;
+
+            if (paciente.Endereco != null)
+            {
+                if (string.IsNullOrEmpty(paciente.Endereco[0]))
+                    return true;
+
+                if (string.IsNullOrEmpty(paciente.Endereco[1]))
+                    return true;
             }
             else
             {
-                return new PacienteData().ListarComLimite(6);
+                return true;
+            }
+
+            return false;
+        }
+
+
+
+        public static string Formatar(string unformated)
+        {
+            string formated = unformated;
+
+            if (string.IsNullOrEmpty(formated))
+            {
+                return "Texto inválido!";
+            }
+            else
+            {
+                if (formated.Contains("/"))
+                    formated = formated.Replace("/", "");
+
+                if (formated.Contains("-"))
+                    formated = formated.Replace("-", "");
+
+                if (formated.Contains("."))
+                    formated = formated.Replace(".", "");
+
+                if (formated.Contains("("))
+                    formated = formated.Replace("(", "");
+
+                if (formated.Contains(")"))
+                    formated = formated.Replace(")", "");
+
+                if (formated.Contains(" "))
+                    formated = formated.Replace(" ", "");
+
+                return formated;
             }
         }
     }
