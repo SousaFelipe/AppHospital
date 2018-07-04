@@ -1,4 +1,4 @@
-﻿using Controller;
+﻿using System.Windows;
 using System.Windows.Media;
 
 using View.Adapter;
@@ -9,7 +9,8 @@ namespace View
 {
     public partial class Window : System.Windows.Window
     {
-        private PacienteViewAdapter Adapter { get; set; }
+        private PacienteViewAdapter     ViewAdapter { get; set; }
+        private PacientePagesAdapter    PagesAdapter { get; set; }
 
 
 
@@ -21,14 +22,13 @@ namespace View
 
 
 
-        public void Refresh(string trecho)
+        public void Refresh(string nome)
         {
-            Adapter = new PacienteViewAdapter(this, stp_pacientes)
-            {
-                Dataset = new PacienteController().Listar(null)
-            };
+            ViewAdapter = new PacienteViewAdapter(this, stp_pacientes);
+            PagesAdapter = new PacientePagesAdapter(this, stp_pages, ViewAdapter);
 
-            Adapter.Build();
+            PagesAdapter.Build();
+            ViewAdapter.Build();
         }
 
 
@@ -43,8 +43,14 @@ namespace View
         private void FabNovoPaciente_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             fab_novo_paciente.Background = new SolidColorBrush(Color.FromRgb(255, 64, 129));
-
             new NovoPacienteDialog(this).Show();
+        }
+
+
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -15,7 +15,18 @@ namespace View.Components
     public partial class PacienteItemView : UserControl
     {
         public PacienteViewAdapter  Adapter { get; private set; }
-        public Paciente             Item { get; set; }
+
+
+
+        public Paciente Item
+        {
+            get
+            {
+                return new PacienteController().Buscar(
+                    new string[] { "nome", "responsavel" }, new string[] { tbk_nome.Text, tbk_responsavel.Text }
+                );
+            }
+        }
 
 
 
@@ -54,11 +65,33 @@ namespace View.Components
 
         private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Item = new PacienteController().Buscar(new string[] { "nome" }, new string[] { tbk_nome.Text });
-
             PacienteDialog dialog = new PacienteDialog(Adapter.Owner);
             dialog.CarregarPaciente(Item.ID);
             dialog.Show();
+        }
+
+
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+            PacienteController controller = new PacienteController();
+
+            if (item.Name.Equals("delete"))
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Você realmente deseja remover este Paciente?\nEsta ação é ireversível!",
+                    "Paciente",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question
+                );
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show(controller.Remover(Item.ID), "Removendo paciente...", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Adapter.Owner.Refresh(null);
+                }
+            }
         }
     }
 }

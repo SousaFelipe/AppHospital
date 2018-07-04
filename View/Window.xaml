@@ -39,6 +39,26 @@
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
+        <VisualBrush x:Key="Left">
+            <VisualBrush.Visual>
+                <Grid>
+                    <Image
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Source="Resources/left_enabled.png"/>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+        <VisualBrush x:Key="Right">
+            <VisualBrush.Visual>
+                <Grid>
+                    <Image
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Source="Resources/right_enabled.png"/>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
     </Window.Resources>
 
     <Grid>
@@ -120,7 +140,8 @@
                         <MenuItem
                             Width="24"
                             Height="24"
-                            Background="{ StaticResource Search }">
+                            Background="{ StaticResource Search }"
+                            Click="MenuItem_Click">
                         </MenuItem>
                     </Menu>
 
@@ -246,6 +267,49 @@
                 </Grid>
 
             </materialDesign:Card>
+
+        </Grid>
+
+        <Grid
+            Grid.Row="3"
+            Grid.Column="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Menu
+                Grid.Column="0"
+                Width="24" Height="24"
+                HorizontalAlignment="Right"
+                Margin="8 0" Background="Transparent">
+                <MenuItem
+                    Width="24"
+                    Height="24"
+                    Background="{ StaticResource Left }">
+                </MenuItem>
+            </Menu>
+
+            <StackPanel
+                Grid.Column="1"
+                x:Name="stp_pages"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+            <Menu
+                Grid.Column="2"
+                Width="24" Height="24"
+                HorizontalAlignment="Left"
+                Margin="8 0" Background="Transparent">
+                <MenuItem
+                    Width="24"
+                    Height="24"
+                    Background="{ StaticResource Right }">
+                </MenuItem>
+            </Menu>
 
         </Grid>
 

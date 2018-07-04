@@ -152,7 +152,7 @@
 
                 </Grid>
 
-                <Separator Grid.Row="1" Height="1" Margin="104 0 40 0" Background="#DBDBDB" VerticalAlignment="Top"/>
+                <Separator Grid.Row="1" Height="1" Margin="104 0 24 0" Background="#DBDBDB" VerticalAlignment="Top"/>
 
                 <Grid Grid.Row="1">
 
@@ -224,7 +224,7 @@
 
                 </Grid>
 
-                <Separator Grid.Row="2" Height="1" Margin="104 0 40 0" Background="#DBDBDB" VerticalAlignment="Top"/>
+                <Separator Grid.Row="2" Height="1" Margin="104 0 24 0" Background="#DBDBDB" VerticalAlignment="Top"/>
 
                 <Grid Grid.Row="2">
 

@@ -9,13 +9,15 @@ namespace Data
 {
     public class PacienteData : Conexao
     {
-        public List<Paciente> Listar()
+        public List<Paciente> Listar(int min, int max)
         {
             using (MyConnection = new MySqlConnection(ConnectionString))
             {
                 MyConnection.Open();
 
-                using (MyCommand = new MySqlCommand("SELECT * FROM pacientes;", MyConnection))
+                string sql = "SELECT * FROM pacientes WHERE id BETWEEN '" + min + "' AND '" + max + "' ORDER BY id DESC";
+
+                using (MyCommand = new MySqlCommand(sql, MyConnection))
                 {
                     using (MyReader = MyCommand.ExecuteReader())
                     {
@@ -99,6 +101,53 @@ namespace Data
 
 
 
+        public int Contar(Paciente.Contador contador)
+        {
+            try
+            {
+                using (MyConnection = new MySqlConnection(ConnectionString))
+                {
+                    MyConnection.Open();
+
+                    string sql = (contador.Equals(Paciente.Contador.MaxID))
+                        ? "SELECT MAX(id) as id FROM pacientes"
+                        : "SELECT COUNT(*) FROM pacientes";
+
+                    using (MyCommand = new MySqlCommand(sql, MyConnection))
+                    {
+                        if (contador.Equals(Paciente.Contador.MaxID))
+                        {
+                            using (MyReader = MyCommand.ExecuteReader())
+                            {
+                                if (MyReader.Read())
+                                {
+                                    return Convert.ToInt32(MyReader["id"]);
+                                }
+                            }
+                        }
+                        else if (contador.Equals(Paciente.Contador.Quantidade))
+                        {
+                            return Convert.ToInt32(MyCommand.ExecuteScalar());
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                MyConnection.Clone();
+                MyCommand.Dispose();
+
+                if (MyReader != null && !MyReader.IsClosed)
+                {
+                    MyReader.Close();
+                }
+            }
+
+            return -1; 
+        }
+
+
+
         public string Inserir(Paciente paciente)
         {
             try
@@ -107,9 +156,10 @@ namespace Data
                 {
                     MyConnection.Open();
 
-                    using (MyCommand = new MySqlCommand("INSERT INTO pacientes (nome, responsavel, data_nascimento, sexo, cartao_sus, endereco," +
-                        "telefone) VALUES (@nome, @responsavel, @data_nascimento, @sexo, @cartao_sus, @endereco, @telefone)", MyConnection))
+                    using (MyCommand = new MySqlCommand("INSERT INTO pacientes (id, nome, responsavel, data_nascimento, sexo, cartao_sus, endereco," +
+                        "telefone) VALUES (@id, @nome, @responsavel, @data_nascimento, @sexo, @cartao_sus, @endereco, @telefone)", MyConnection))
                     {
+                        MyCommand.Parameters.AddWithValue("@id", Contar(Paciente.Contador.MaxID) + 1);
                         MyCommand.Parameters.AddWithValue("@nome", paciente.Nome);
                         MyCommand.Parameters.AddWithValue("@responsavel", paciente.Responsavel);
                         MyCommand.Parameters.AddWithValue("@data_nascimento", paciente.DataNascimento);
@@ -165,7 +215,7 @@ namespace Data
             }
             catch (MySqlException)
             {
-                return "Erro ao remover cliente!";
+                return "Erro ao remover paciente!";
             }
             finally
             {
@@ -211,16 +261,17 @@ namespace Data
         {
             public Paciente Get(MySqlDataReader reader)
             {
-                Paciente paciente = new Paciente();
-
-                paciente.ID = Convert.ToInt32(reader["id"]);
-                paciente.Nome = Convert.ToString(reader["nome"]);
-                paciente.Responsavel = Convert.ToString(reader["responsavel"]);
-                paciente.DataNascimento = Convert.ToDateTime(reader["data_nascimento"]);
-                paciente.Sexo = Convert.ToInt32(reader["sexo"]);
-                paciente.CartaoSus = Convert.ToString(reader["cartao_sus"]);
-                paciente.Endereco = Convert.ToString(reader["endereco"]).Split(';');
-                paciente.Telefone = Convert.ToString(reader["telefone"]);
+                Paciente paciente = new Paciente
+                {
+                    ID = Convert.ToInt32(reader["id"]),
+                    Nome = Convert.ToString(reader["nome"]),
+                    Responsavel = Convert.ToString(reader["responsavel"]),
+                    DataNascimento = Convert.ToDateTime(reader["data_nascimento"]),
+                    Sexo = Convert.ToInt32(reader["sexo"]),
+                    CartaoSus = Convert.ToString(reader["cartao_sus"]),
+                    Endereco = Convert.ToString(reader["endereco"]).Split(';'),
+                    Telefone = Convert.ToString(reader["telefone"])
+                };
 
                 return paciente;
             }

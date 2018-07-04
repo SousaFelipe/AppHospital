@@ -8,16 +8,16 @@ namespace Controller
 {
     public class PacienteController
     {
-        public List<Paciente> Listar(string nome)
+        public List<Paciente> Listar(int inicio, int fim)
         {
-            if (string.IsNullOrEmpty(nome))
-            {
-                return new PacienteData().Listar();
-            }
-            else
-            {
-                return new PacienteData().Filtar(nome);
-            }
+            return new PacienteData().Listar(inicio, fim);
+        }
+
+
+
+        public List<Paciente> Filtrar(string nome)
+        {
+            return new PacienteData().Filtar(nome);
         }
 
 
@@ -25,6 +25,13 @@ namespace Controller
         public Paciente Buscar(string[] colunas, string[] valores)
         {
             return new PacienteData().Buscar(colunas, valores);
+        }
+
+
+
+        public int Contar(Paciente.Contador contador)
+        {
+            return new PacienteData().Contar(contador); 
         }
 
 

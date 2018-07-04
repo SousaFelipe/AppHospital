@@ -152,9 +152,11 @@ namespace View.Components
 
                     Hide();
 
-                    MessageBox.Show(new PacienteController().Inserir(paciente), "Pacientes", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(
+                        new PacienteController().Inserir(paciente), "Salvando paciente...", MessageBoxButton.OK, MessageBoxImage.Information
+                    );
 
-                    ((View.Window)Owner).Refresh(null);
+                    Owner.Refresh(null);
                 }
             }
             else if (button.Content.Equals("CANCELAR"))

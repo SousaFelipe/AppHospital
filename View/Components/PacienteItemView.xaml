@@ -104,7 +104,8 @@
                     <MenuItem
                         Width="24"
                         Height="24"
-                        Background="{ StaticResource History }">
+                        Background="{ StaticResource History }"
+                        Click="MenuItem_Click">
                     </MenuItem>
                 </Menu>
 
@@ -115,7 +116,8 @@
                     <MenuItem
                         Width="24"
                         Height="24"
-                        Background="{ StaticResource Edit }">
+                        Background="{ StaticResource Edit }"
+                        Click="MenuItem_Click">
                     </MenuItem>
                 </Menu>
 
@@ -124,9 +126,11 @@
                     Width="24" Height="24"
                     Margin="8 0" Background="Transparent">
                     <MenuItem
+                        x:Name="delete"
                         Width="24"
                         Height="24"
-                        Background="{ StaticResource Delete }">
+                        Background="{ StaticResource Delete }"
+                        Click="MenuItem_Click">
                     </MenuItem>
                 </Menu>
 

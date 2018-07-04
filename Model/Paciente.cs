@@ -12,5 +12,12 @@ namespace Model
         public string   CartaoSus       { get; set; }
         public string[] Endereco        { get; set; }
         public string   Telefone        { get; set; }
+
+
+
+        public enum Contador
+        {
+            MaxID, Quantidade
+        }
     }
 }

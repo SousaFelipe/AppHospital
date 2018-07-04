@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Adapter\PacientePagesAdapter.cs" />
     <Compile Include="Adapter\PacienteViewAdapter.cs" />
     <Compile Include="Adapter\StackPanelAdapter.cs" />
     <Compile Include="App.xaml.cs">
@@ -77,6 +78,9 @@
     </Compile>
     <Compile Include="Components\PacienteItemView.xaml.cs">
       <DependentUpon>PacienteItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PageItemView.xaml.cs">
+      <DependentUpon>PageItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Path.cs" />
     <Compile Include="Window.xaml.cs">
@@ -123,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Components\PageItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -153,6 +161,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\people.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\left_enabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\right_enabled.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
