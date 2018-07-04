@@ -75,22 +75,37 @@ namespace View.Components
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
-            PacienteController controller = new PacienteController();
 
-            if (item.Name.Equals("delete"))
+
+            if (item.Name.Equals("history"))
             {
-                MessageBoxResult result = MessageBox.Show(
+
+            }
+            else if (item.Name.Equals("edit"))
+            {
+
+            }
+            else if (item.Name.Equals("delete"))
+            {
+                Delete();
+            }
+        }
+
+
+
+        private void Delete()
+        {
+            MessageBoxResult result = MessageBox.Show(
                     "Você realmente deseja remover este Paciente?\nEsta ação é ireversível!",
                     "Paciente",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question
-                );
+            );
 
-                if (result == MessageBoxResult.Yes)
-                {
-                    MessageBox.Show(controller.Remover(Item.ID), "Removendo paciente...", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Adapter.Owner.Refresh(null);
-                }
+            if (result == MessageBoxResult.Yes)
+            {
+                MessageBox.Show(new PacienteController().Remover(Item.ID), "Removendo paciente...", MessageBoxButton.OK, MessageBoxImage.Information);
+                Adapter.Owner.Refresh();
             }
         }
     }

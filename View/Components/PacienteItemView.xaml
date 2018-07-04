@@ -51,17 +51,20 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0"
+        <Image
+            Grid.Column="0"
             x:Name="icn_sexo"
             Width="36"
             Height="36"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"/>
 
-        <TextBlock Grid.Column="1"
+        <TextBlock
+            Grid.Column="1"
             x:Name="tbk_nome"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            Margin="0 0 16 0"       
             FontSize="16"
             Foreground="#212121"/>
 
@@ -70,6 +73,7 @@
             x:Name="tbk_responsavel"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            Margin="0 0 16 0"
             FontSize="16"
             Foreground="#757575"/>
 
@@ -78,6 +82,7 @@
             x:Name="tbk_endereco"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            Margin="0 0 16 0"
             FontSize="16"
             Foreground="#757575"/>
 
@@ -102,11 +107,11 @@
                     Width="24" Height="24"
                     Margin="8 0" Background="Transparent">
                     <MenuItem
+                        x:Name="history"
                         Width="24"
                         Height="24"
                         Background="{ StaticResource History }"
-                        Click="MenuItem_Click">
-                    </MenuItem>
+                        Click="MenuItem_Click"/>
                 </Menu>
 
                 <Menu
@@ -114,11 +119,11 @@
                     Width="24" Height="24"
                     Margin="8 0" Background="Transparent">
                     <MenuItem
+                        x:Name="edit"
                         Width="24"
                         Height="24"
                         Background="{ StaticResource Edit }"
-                        Click="MenuItem_Click">
-                    </MenuItem>
+                        Click="MenuItem_Click"/>
                 </Menu>
 
                 <Menu
@@ -130,8 +135,7 @@
                         Width="24"
                         Height="24"
                         Background="{ StaticResource Delete }"
-                        Click="MenuItem_Click">
-                    </MenuItem>
+                        Click="MenuItem_Click"/>
                 </Menu>
 
             </Grid>

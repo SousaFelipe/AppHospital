@@ -15,13 +15,13 @@
     d:DesignHeight="680" d:DesignWidth="720">
 
     <UserControl.Resources>
-        <VisualBrush x:Key="Edit">
+        <VisualBrush x:Key="Menu">
             <VisualBrush.Visual>
                 <Grid>
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/pencil.png"/>
+                        Source="/AppHospital;component/Resources/menu_gray.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -72,6 +72,20 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
+                    <Menu
+                        Grid.Column="1"
+                        Width="24" Height="24"
+                        Margin="24 0" Background="Transparent"
+                        HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <MenuItem
+                            Width="24"
+                            Height="24"
+                            Background="{ StaticResource Menu }">
+                            <MenuItem x:Name="itm_editar" Header="Editar" Background="White"/>
+                            <MenuItem x:Name="itm_remover" Header="Remover" Background="White"/>
+                        </MenuItem>
+                    </Menu>
+
                     <Image
                         Grid.Column="0"
                         Grid.Row="0"
@@ -89,39 +103,20 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid
-                            Grid.Row="0">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock
-                                Grid.Row="0"
-                                x:Name="tbk_nome"
-                                FontSize="21"
-                                Foreground="#212121"
-                                HorizontalAlignment="Left"/>
-
-                            <Menu
-                                Grid.Column="1"
-                                Width="24" Height="24"
-                                Margin="8 0" Background="Transparent"
-                                HorizontalAlignment="Left">
-                                <MenuItem
-                                    Width="24"
-                                    Height="24"
-                                    Background="{ StaticResource Edit }">
-                                </MenuItem>
-                            </Menu>
-
-                        </Grid>
+                        <TextBlock
+                            Grid.Row="0"
+                            x:Name="tbk_nome"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="#212121"
+                            HorizontalAlignment="Left"/>
 
                         <TextBlock
                             Grid.Row="1"
                             x:Name="tbk_data_nascimento"
-                            FontSize="16" Foreground="#757575"/>
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Foreground="#757575"/>
 
                     </Grid>
 

@@ -140,9 +140,7 @@
                         <MenuItem
                             Width="24"
                             Height="24"
-                            Background="{ StaticResource Search }"
-                            Click="MenuItem_Click">
-                        </MenuItem>
+                            Background="{ StaticResource Search }"/>
                     </Menu>
 
                     <Menu
@@ -288,8 +286,8 @@
                 <MenuItem
                     Width="24"
                     Height="24"
-                    Background="{ StaticResource Left }">
-                </MenuItem>
+                    Background="{ StaticResource Left }"
+                    Click="PreviousItem_Click"/>
             </Menu>
 
             <StackPanel
@@ -307,8 +305,8 @@
                 <MenuItem
                     Width="24"
                     Height="24"
-                    Background="{ StaticResource Right }">
-                </MenuItem>
+                    Background="{ StaticResource Right }"
+                    Click="NextItem_Click"/>
             </Menu>
 
         </Grid>

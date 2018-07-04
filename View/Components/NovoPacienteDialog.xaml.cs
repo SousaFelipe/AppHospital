@@ -156,7 +156,7 @@ namespace View.Components
                         new PacienteController().Inserir(paciente), "Salvando paciente...", MessageBoxButton.OK, MessageBoxImage.Information
                     );
 
-                    Owner.Refresh(null);
+                    Owner.Refresh();
                 }
             }
             else if (button.Content.Equals("CANCELAR"))

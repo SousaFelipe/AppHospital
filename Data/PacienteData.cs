@@ -11,30 +11,35 @@ namespace Data
     {
         public List<Paciente> Listar(int min, int max)
         {
-            using (MyConnection = new MySqlConnection(ConnectionString))
+            try
             {
-                MyConnection.Open();
-
-                string sql = "SELECT * FROM pacientes WHERE id BETWEEN '" + min + "' AND '" + max + "' ORDER BY id DESC";
-
-                using (MyCommand = new MySqlCommand(sql, MyConnection))
+                using (MyConnection = new MySqlConnection(ConnectionString))
                 {
-                    using (MyReader = MyCommand.ExecuteReader())
+                    MyConnection.Open();
+
+                    string sql = "SELECT * FROM pacientes WHERE id BETWEEN '" + min + "' AND '" + max + "' ORDER BY id DESC";
+
+                    using (MyCommand = new MySqlCommand(sql, MyConnection))
                     {
-                        List<Paciente> pacientes = new List<Paciente>();
-
-                        while (MyReader.Read())
+                        using (MyReader = MyCommand.ExecuteReader())
                         {
-                            pacientes.Add(new Content().Get(MyReader));
+                            List<Paciente> pacientes = new List<Paciente>();
+
+                            while (MyReader.Read())
+                            {
+                                pacientes.Add(new Content().Get(MyReader));
+                            }
+
+                            return pacientes;
                         }
-
-                        MyReader.Close();
-                        MyCommand.Dispose();
-                        MyConnection.Close();
-
-                        return pacientes;
                     }
                 }
+            }
+            finally
+            {
+                MyReader.Close();
+                MyCommand.Dispose();
+                MyConnection.Close();
             }
         }
 
@@ -42,28 +47,33 @@ namespace Data
 
         public List<Paciente> Filtar(string nome)
         {
-            using (MyConnection = new MySqlConnection(ConnectionString))
+            try
             {
-                MyConnection.Open();
-
-                using (MyCommand = new MySqlCommand("SELECT * FROM pacientes WHERE nome LIKE '" + nome + "%'", MyConnection))
+                using (MyConnection = new MySqlConnection(ConnectionString))
                 {
-                    using (MyReader = MyCommand.ExecuteReader())
+                    MyConnection.Open();
+
+                    using (MyCommand = new MySqlCommand("SELECT * FROM pacientes WHERE nome LIKE '" + nome + "%'", MyConnection))
                     {
-                        List<Paciente> pacientes = new List<Paciente>();
-
-                        while (MyReader.Read())
+                        using (MyReader = MyCommand.ExecuteReader())
                         {
-                            pacientes.Add(new Content().Get(MyReader));
+                            List<Paciente> pacientes = new List<Paciente>();
+
+                            while (MyReader.Read())
+                            {
+                                pacientes.Add(new Content().Get(MyReader));
+                            }
+
+                            return pacientes;
                         }
-
-                        MyReader.Close();
-                        MyCommand.Dispose();
-                        MyConnection.Close();
-
-                        return pacientes;
                     }
                 }
+            }
+            finally
+            {
+                MyReader.Close();
+                MyCommand.Dispose();
+                MyConnection.Close();
             }
         }
 
@@ -134,7 +144,7 @@ namespace Data
             }
             finally
             {
-                MyConnection.Clone();
+                MyConnection.Close();
                 MyCommand.Dispose();
 
                 if (MyReader != null && !MyReader.IsClosed)
@@ -150,6 +160,8 @@ namespace Data
 
         public string Inserir(Paciente paciente)
         {
+            int id = Contar(Paciente.Contador.MaxID) + 1;
+
             try
             {
                 using (MyConnection = new MySqlConnection(ConnectionString))
@@ -159,7 +171,7 @@ namespace Data
                     using (MyCommand = new MySqlCommand("INSERT INTO pacientes (id, nome, responsavel, data_nascimento, sexo, cartao_sus, endereco," +
                         "telefone) VALUES (@id, @nome, @responsavel, @data_nascimento, @sexo, @cartao_sus, @endereco, @telefone)", MyConnection))
                     {
-                        MyCommand.Parameters.AddWithValue("@id", Contar(Paciente.Contador.MaxID) + 1);
+                        MyCommand.Parameters.AddWithValue("@id", id);
                         MyCommand.Parameters.AddWithValue("@nome", paciente.Nome);
                         MyCommand.Parameters.AddWithValue("@responsavel", paciente.Responsavel);
                         MyCommand.Parameters.AddWithValue("@data_nascimento", paciente.DataNascimento);
@@ -180,7 +192,7 @@ namespace Data
             }
             finally
             {
-                MyConnection.Clone();
+                MyConnection.Close();
                 MyCommand.Dispose();
             }
         }
@@ -219,7 +231,7 @@ namespace Data
             }
             finally
             {
-                MyConnection.Clone();
+                MyConnection.Close();
                 MyCommand.Dispose();
             }
         }
@@ -250,7 +262,7 @@ namespace Data
             }
             finally
             {
-                MyConnection.Clone();
+                MyConnection.Close();
                 MyCommand.Dispose();
             }
         }

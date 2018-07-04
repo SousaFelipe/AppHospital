@@ -17,18 +17,16 @@ namespace View
         public Window()
         {
             InitializeComponent();
-            Refresh(null);
+            Refresh();
         }
 
 
 
-        public void Refresh(string nome)
+        public void Refresh()
         {
             ViewAdapter = new PacienteViewAdapter(this, stp_pacientes);
             PagesAdapter = new PacientePagesAdapter(this, stp_pages, ViewAdapter);
-
             PagesAdapter.Build();
-            ViewAdapter.Build();
         }
 
 
@@ -48,9 +46,16 @@ namespace View
 
 
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void PreviousItem_Click(object sender, RoutedEventArgs e)
         {
-            
+            PagesAdapter.Previous();
+        }
+
+
+
+        private void NextItem_Click(object sender, RoutedEventArgs e)
+        {
+            PagesAdapter.Next();
         }
     }
 }
