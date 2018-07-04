@@ -30,13 +30,39 @@ namespace View.Components
         public NovoPacienteDialog(Window owner)
         {
             InitializeComponent();
-
             Owner = owner;
         }
 
 
 
+        public void Show(Paciente paciente)
+        {
+            tbk_legenda.Text = "Editar paciente";
+
+            txb_nome_paciente.Text = paciente.Nome;
+            dpk_data_nascimento.Text = paciente.DataNascimento.ToString("dd/MM/yyyy");
+            txb_cartao_sus.Text = string.Format("{0:### #### #### ####}", Convert.ToInt64(paciente.CartaoSus));
+            cbx_sexo.SelectedIndex = paciente.Sexo + 1;
+            txb_nome_responsavel.Text = paciente.Responsavel;
+            txb_telefone_responsavel.Text = string.Format("{0:(##) # ####-####}", Convert.ToInt64(paciente.Telefone));
+            txb_bairro_distrito.Text = paciente.Endereco[0];
+            txb_rua.Text = paciente.Endereco[1];
+            txb_numero_casa.Text = paciente.Endereco[2];
+
+            AddToContent();
+        }
+
+
+
         public void Show()
+        {
+            tbk_legenda.Text = "Novo paciente";
+            AddToContent();
+        }
+
+
+
+        private void AddToContent()
         {
             int colCount = ContentOwner.ColumnDefinitions.Count;
             int rowCount = ContentOwner.RowDefinitions.Count;
@@ -98,66 +124,30 @@ namespace View.Components
 
 
 
-        private bool CamposVazios()
-        {
-            if (string.IsNullOrEmpty(txb_nome_paciente.Text))
-                return true;
-
-            if (string.IsNullOrEmpty(dpk_data_nascimento.Text))
-                return true;
-
-            if (string.IsNullOrEmpty(txb_cartao_sus.Text))
-                return true;
-
-            if (cbx_sexo.SelectedIndex <= 0)
-                return true;
-
-            if (string.IsNullOrEmpty(txb_nome_responsavel.Text))
-                return true;
-
-            if (string.IsNullOrEmpty(txb_telefone_responsavel.Text))
-                return true;
-
-            if (string.IsNullOrEmpty(txb_bairro_distrito.Text))
-                return true;
-
-            if (string.IsNullOrEmpty(txb_rua.Text))
-                return true;
-
-            return false;
-        }
-
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = ((Button)sender);
 
             if (button.Content.Equals("SALVAR"))
             {
-                if (CamposVazios())
+                Paciente paciente = new Paciente()
                 {
-                    MessageBox.Show("Um ou mais campos importantes estão vazios!", "Pacientes", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    Paciente paciente = new Paciente();
-                    paciente.Nome = txb_nome_paciente.Text;
-                    paciente.DataNascimento = Convert.ToDateTime(dpk_data_nascimento.Text);
-                    paciente.CartaoSus = txb_cartao_sus.Text;
-                    paciente.Sexo = (cbx_sexo.SelectedIndex - 1);
-                    paciente.Responsavel = txb_nome_responsavel.Text;
-                    paciente.Telefone = PacienteController.Formatar(txb_telefone_responsavel.Text);
-                    paciente.Endereco = new string[] { txb_bairro_distrito.Text, txb_rua.Text, txb_numero_casa.Text };
+                    Nome = txb_nome_paciente.Text,
+                    DataNascimento = Convert.ToDateTime(dpk_data_nascimento.Text),
+                    CartaoSus = PacienteController.Formatar(txb_cartao_sus.Text),
+                    Sexo = (cbx_sexo.SelectedIndex - 1),
+                    Responsavel = txb_nome_responsavel.Text,
+                    Telefone = PacienteController.Formatar(txb_telefone_responsavel.Text),
+                    Endereco = new string[] { txb_bairro_distrito.Text, txb_rua.Text, txb_numero_casa.Text }
+                };
 
-                    Hide();
+                Hide();
 
-                    MessageBox.Show(
-                        new PacienteController().Inserir(paciente), "Salvando paciente...", MessageBoxButton.OK, MessageBoxImage.Information
-                    );
+                MessageBox.Show(
+                    new PacienteController().Inserir(paciente), "Salvando paciente...", MessageBoxButton.OK, MessageBoxImage.Information
+                );
 
-                    Owner.Refresh();
-                }
+                Owner.Refresh();
             }
             else if (button.Content.Equals("CANCELAR"))
             {

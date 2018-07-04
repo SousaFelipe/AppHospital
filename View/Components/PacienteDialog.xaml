@@ -81,8 +81,16 @@
                             Width="24"
                             Height="24"
                             Background="{ StaticResource Menu }">
-                            <MenuItem x:Name="itm_editar" Header="Editar" Background="White"/>
-                            <MenuItem x:Name="itm_remover" Header="Remover" Background="White"/>
+                            <MenuItem
+                                x:Name="itm_editar"
+                                Header="Editar"
+                                Background="White"
+                                Click="MenuItem_Click"/>
+                            <MenuItem
+                                x:Name="itm_remover"
+                                Header="Remover"
+                                Background="White"
+                                Click="MenuItem_Click"/>
                         </MenuItem>
                     </Menu>
 

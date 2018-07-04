@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexao.cs" />
+    <Compile Include="InternacaoData.cs" />
     <Compile Include="PacienteData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

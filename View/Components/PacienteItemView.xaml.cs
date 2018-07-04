@@ -83,7 +83,7 @@ namespace View.Components
             }
             else if (item.Name.Equals("edit"))
             {
-
+                new NovoPacienteDialog(Adapter.Owner).Show(Item);
             }
             else if (item.Name.Equals("delete"))
             {

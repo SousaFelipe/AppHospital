@@ -48,7 +48,10 @@
                         Margin="24 24 24 12">
 
                         <TextBlock
-                            Foreground="#212121" FontSize="26" Text="Novo paciente" FontWeight="Bold"/>
+                            x:Name="tbk_legenda"
+                            Foreground="#212121"
+                            FontSize="26"
+                            FontWeight="Bold"/>
 
                     </Grid>
 
@@ -74,44 +77,46 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBox Grid.Column="0" Grid.Row="0"
+                            <TextBox
+                                Grid.Column="0"
+                                Grid.Row="0"
                                 x:Name="txb_nome_paciente"
                                 Margin="0 0 4 12"
-                                FontSize="16" Foreground="#212121"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                FontSize="16"
+                                Foreground="#212121"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Nome do paciente"/>
 
-                            <!--<TextBox
-                                Grid.Column="1" Grid.Row="0"
-                                x:Name="TbxNascimento"
-                                Width="130"
-                                FontSize="16"
-                                Margin="0,0,0,12"
-                                Foreground="#212121"
-                                HorizontalAlignment="Right"
-                                CaretIndex="0"
-                                materialDesign:HintAssist.Hint="00/00/0000"
-                                MaxLength="10"/>-->
-
                             <DatePicker
-                                Grid.Column="1" Grid.Row="0" x:Name="dpk_data_nascimento"
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                x:Name="dpk_data_nascimento"
                                 Width="130" Margin="4 0 0 0"
                                 FontSize="16"
-                                VerticalAlignment="Top" HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
                                 materialDesign:HintAssist.Hint="Dt. nascimento"/>
 
                             <TextBox
-                                Grid.Column="0" Grid.Row="1"  x:Name="txb_cartao_sus"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                x:Name="txb_cartao_sus"
                                 Margin="0 12 4 0"
                                 FontSize="16" Foreground="#212121"
-                                VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="CNS (cartão do sus)"/>
 
                             <ComboBox
-                                Grid.Column="1" Grid.Row="1" x:Name="cbx_sexo" SelectedIndex="0"
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                x:Name="cbx_sexo"
+                                SelectedIndex="0"
                                 Width="130" Margin="4 12 0 0"
                                 FontSize="16"
-                                HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom">
                                 <ComboBox.Items>
                                     <ComboBoxItem>Sexo</ComboBoxItem>
                                     <ComboBoxItem>Feminino</ComboBoxItem>
@@ -134,17 +139,25 @@
                             </Grid.RowDefinitions>
 
                             <TextBox
-                                Grid.Column="0" Grid.Row="0" x:Name="txb_nome_responsavel"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                x:Name="txb_nome_responsavel"
                                 Margin="0 0 4 12"
-                                FontSize="16" Foreground="#212121"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                FontSize="16"
+                                Foreground="#212121"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Nome do responsável"/>
 
                             <TextBox
-                                Grid.Column="1" Grid.Row="0" x:Name="txb_telefone_responsavel"
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                x:Name="txb_telefone_responsavel"
                                 Width="130" Margin="4 0 0 12"
-                                MaxLength="16" FontSize="16" Foreground="#212121" Text="{ Binding Path=PhoneNumber, StringFormat={}{0:(##) # ####-####} }"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                MaxLength="16" FontSize="16"
+                                Foreground="#212121"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Telefone"/>
 
                         </Grid>
@@ -158,24 +171,33 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBox
-                                Grid.Column="0" x:Name="txb_bairro_distrito"
+                                Grid.Column="0"
+                                x:Name="txb_bairro_distrito"
                                 Margin="0 0 4 0"
-                                FontSize="16" Foreground="#212121"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                FontSize="16"
+                                Foreground="#212121"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Bairro ou distrito"/>
 
                             <TextBox
-                                Grid.Column="1" x:Name="txb_rua"
+                                Grid.Column="1"
+                                x:Name="txb_rua"
                                 Margin="4 0 4 0"
-                                FontSize="16" Foreground="#212121"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                FontSize="16"
+                                Foreground="#212121"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Rua ou localidade"/>
 
                             <TextBox
-                                Grid.Column="2" x:Name="txb_numero_casa"
+                                Grid.Column="2"
+                                x:Name="txb_numero_casa"
                                 Width="50" Margin="4 0 0 0"
-                                FontSize="16" Foreground="#212121"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                FontSize="16"
+                                Foreground="#212121"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="N°"/>
 
                         </Grid>

@@ -8,15 +8,18 @@ using System.Windows.Media.Imaging;
 using Model;
 using Controller;
 
+
 namespace View.Components
 {
     public partial class PacienteDialog : UserControl
     {
         private DispatcherTimer Timer { get; set; }
         private Window          Owner { get; set; }
+        private Paciente        Atual { get; set; }
 
 
-        
+
+
         private Grid ContentOwner
         {
             get
@@ -38,34 +41,34 @@ namespace View.Components
 
         public void CarregarPaciente(int id)
         {
-            Paciente paciente = new PacienteController().Buscar(new string[] { "id" }, new string[] { id.ToString() });
+            Atual = new PacienteController().Buscar(new string[] { "id" }, new string[] { id.ToString() });
 
-            if (paciente == null)
+            if (Atual == null)
             {
                 MessageBox.Show("Paciente desconhecido!", "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                icn_sexo.Source = (paciente.Sexo == 0)
-                ? new BitmapImage(new Uri(Path.Resources + "menina.png"))
-                : new BitmapImage(new Uri(Path.Resources + "menino.png"));
+                icn_sexo.Source = (Atual.Sexo == 0)
+                    ? new BitmapImage(new Uri(Path.Resources + "menina.png"))
+                    : new BitmapImage(new Uri(Path.Resources + "menino.png"));
 
-                tbk_nome.Text = paciente.Nome;
-                tbk_data_nascimento.Text = paciente.DataNascimento.ToString("dd/MM/yyyy");
-                tbk_cartao_sus.Text = string.Format("{0:### #### #### ####}", Convert.ToInt64(paciente.CartaoSus));
-                tbk_responsavel.Text = paciente.Responsavel;
-                tbk_telefone.Text = string.Format("{0:(##) # ####-####}", Convert.ToInt64(paciente.Telefone));
-                tbk_bairro.Text = paciente.Endereco[0];
-                tbk_rua.Text = paciente.Endereco[1];
+                tbk_nome.Text = Atual.Nome;
+                tbk_data_nascimento.Text = Atual.DataNascimento.ToString("dd/MM/yyyy");
+                tbk_cartao_sus.Text = string.Format("{0:### #### #### ####}", Convert.ToInt64(Atual.CartaoSus));
+                tbk_responsavel.Text = Atual.Responsavel;
+                tbk_telefone.Text = string.Format("{0:(##) # ####-####}", Convert.ToInt64(Atual.Telefone));
+                tbk_bairro.Text = Atual.Endereco[0];
+                tbk_rua.Text = Atual.Endereco[1];
 
-                if (string.IsNullOrEmpty(paciente.Endereco[2]))
+                if (string.IsNullOrEmpty(Atual.Endereco[2]))
                 {
                     tbk_sub_rua.Text = "Rua/Localidade";
                 }
                 else
                 {
                     tbk_sub_rua.Text = "Rua/Localidade - N°";
-                    tbk_rua.Text += " - " + paciente.Endereco[2];
+                    tbk_rua.Text += " - " + Atual.Endereco[2];
                 }
             }
         }
@@ -129,6 +132,36 @@ namespace View.Components
                 Timer.Stop();
                 shadow.Opacity = 0.00F;
                 ContentOwner.Children.Remove(this);
+            }
+        }
+
+
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (((MenuItem)sender).Name.Equals("itm_editar"))
+            {
+                Hide();
+                new NovoPacienteDialog(this.Owner).Show(Atual);
+            }
+            else if (((MenuItem)sender).Name.Equals("itm_remover"))
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Você realmente deseja remover este Paciente?\nEsta ação é ireversível!",
+                    "Paciente",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question
+                );
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show(
+                        new PacienteController().Remover(Atual.ID), "Removendo paciente...", MessageBoxButton.OK, MessageBoxImage.Information
+                    );
+
+                    Owner.Refresh();
+                    Hide();
+                }
             }
         }
 
