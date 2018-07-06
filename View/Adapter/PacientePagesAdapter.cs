@@ -10,7 +10,6 @@ namespace View.Adapter
 {
     public class PacientePagesAdapter : StackPanelAdapter
     {
-        
         /// <summary>
         /// Quantidade de pacientes por página
         /// </summary>
@@ -141,8 +140,6 @@ namespace View.Adapter
                     MoveRange((PATIENTS_PER_PAGE * i) - 5), MoveRange(PATIENTS_PER_PAGE * i)
                 );
             }
-            // [0] (07, 12) <<>> ()
-            // [] () <<>> ()
         }
     }
 }

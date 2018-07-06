@@ -8,9 +8,9 @@ namespace Controller
 {
     public class PacienteController
     {
-        public List<Paciente> Listar(int inicio, int fim)
+        public List<Paciente> Listar(int min, int max)
         {
-            return new PacienteData().Listar(inicio, fim);
+            return new PacienteData().Listar(min, max);
         }
 
 
