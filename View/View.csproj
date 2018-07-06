@@ -66,6 +66,7 @@
     </ApplicationDefinition>
     <Compile Include="Adapter\PacientePagesAdapter.cs" />
     <Compile Include="Adapter\PacienteViewAdapter.cs" />
+    <Compile Include="Adapter\Pagination.cs" />
     <Compile Include="Adapter\StackPanelAdapter.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -84,6 +85,7 @@
       <DependentUpon>PageItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Path.cs" />
+    <Compile Include="Single.cs" />
     <Compile Include="Window.xaml.cs">
       <DependentUpon>Window.xaml</DependentUpon>
     </Compile>

@@ -9,22 +9,27 @@ namespace Data
 {
     public class PacienteData : Conexao
     {
-        public List<Paciente> Listar(int min, int max)
+        public List<Paciente> Listar(Paciente.Listagem modo, int min, int max)
         {
             try
             {
                 using (MyConnection = new MySqlConnection(ConnectionString))
                 {
                     MyConnection.Open();
+                    List<Paciente> pacientes = new List<Paciente>();
 
-                    string sql = "SELECT * FROM pacientes WHERE id BETWEEN '" + min + "' AND '" + max + "' ORDER BY id DESC";
+                    string sql = (modo.Equals(Paciente.Listagem.Permanentes))
+                        
+                        ? "SELECT * FROM pacientes INNER JOIN internacoes ON pacientes.id=internacoes.paciente " +
+                          "WHERE internacoes.data_saida IS NULL AND pacientes.id BETWEEN " + min + " AND " + max + " " +
+                          "ORDER BY pacientes.nome ASC"
+                        
+                        : "SELECT * FROM pacientes WHERE id BETWEEN " + min + " AND " + max + " ORDER BY pacientes.nome ASC";
 
                     using (MyCommand = new MySqlCommand(sql, MyConnection))
                     {
                         using (MyReader = MyCommand.ExecuteReader())
                         {
-                            List<Paciente> pacientes = new List<Paciente>();
-
                             while (MyReader.Read())
                             {
                                 pacientes.Add(new Content().Get(MyReader));
@@ -111,7 +116,7 @@ namespace Data
 
 
 
-        public int Contar(Paciente.Contador contador)
+        public int Contar(Paciente.Listagem modo)
         {
             try
             {
@@ -119,26 +124,16 @@ namespace Data
                 {
                     MyConnection.Open();
 
-                    string sql = (contador.Equals(Paciente.Contador.MaxID))
-                        ? "SELECT MAX(id) as id FROM pacientes"
+                    string sql = (modo.Equals(Paciente.Listagem.Permanentes))
+
+                        ? "SELECT COUNT(*) FROM pacientes INNER JOIN internacoes ON pacientes.id=internacoes.paciente " +
+                          "WHERE internacoes.data_saida IS NULL"
+
                         : "SELECT COUNT(*) FROM pacientes";
 
                     using (MyCommand = new MySqlCommand(sql, MyConnection))
                     {
-                        if (contador.Equals(Paciente.Contador.MaxID))
-                        {
-                            using (MyReader = MyCommand.ExecuteReader())
-                            {
-                                if (MyReader.Read())
-                                {
-                                    return Convert.ToInt32(MyReader["id"]);
-                                }
-                            }
-                        }
-                        else if (contador.Equals(Paciente.Contador.Quantidade))
-                        {
-                            return Convert.ToInt32(MyCommand.ExecuteScalar());
-                        }
+                        return Convert.ToInt32(MyCommand.ExecuteScalar());
                     }
                 }
             }
@@ -160,7 +155,7 @@ namespace Data
 
         public string Inserir(Paciente paciente)
         {
-            int id = Contar(Paciente.Contador.MaxID) + 1;
+            int id = Contar(Paciente.Listagem.Todos) + 1;
 
             try
             {

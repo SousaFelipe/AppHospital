@@ -106,14 +106,17 @@
                     Text="Pacientes"/>
 
                 <ComboBox
-                    x:Name="cbx_sexo"
+                    x:Name="cbx_modo"
                     SelectedIndex="0"
-                    Width="130"
+                    Width="112"
+                    Margin="0 -8 0 0"
                     FontSize="16"
                     Foreground="White"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Left"
+                    BorderThickness="0"
+                    SelectionChanged="ComboBox_SelectionChanged">
                     <ComboBox.Items>
-                        <ComboBoxItem>Internados</ComboBoxItem>
+                        <ComboBoxItem>Permanentes</ComboBoxItem>
                         <ComboBoxItem>Todos</ComboBoxItem>
                     </ComboBox.Items>
                 </ComboBox>
@@ -179,66 +182,78 @@
                 VerticalAlignment="Stretch"
                 materialDesign:ShadowAssist.ShadowDepth="Depth1">
 
-                <Grid
-                    x:Name="grd_pacientes">
+                <Grid>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="80"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    <TextBlock
+                        x:Name="tbk_pacientes"
+                        Visibility="Hidden"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Text="Nenhum paciente registrado!"
+                        Foreground="#DBDBDB" FontSize="26"/>
 
                     <Grid
-                        Grid.Row="0">
+                        x:Name="grd_pacientes">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="104"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <TextBlock
-                            Grid.Column="1"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontSize="14" Foreground="#757575"
-                            Text="Paciente"/>
+                        <Grid
+                            Grid.Row="0">
 
-                        <TextBlock
-                            Grid.Column="2"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontSize="14" Foreground="#757575"
-                            Text="Responsável"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="104"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock
-                            Grid.Column="3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontSize="14" Foreground="#757575"
-                            Text="Bairro/Distrito"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="14" Foreground="#757575"
+                                Text="Paciente"/>
+
+                            <TextBlock
+                                Grid.Column="2"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="14" Foreground="#757575"
+                                Text="Responsável"/>
+
+                            <TextBlock
+                                Grid.Column="3"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="14" Foreground="#757575"
+                                Text="Bairro/Distrito"/>
+
+                        </Grid>
+
+                        <Separator
+                            Grid.Row="0"
+                            Margin="0 0 0 0"
+                            Background="#DBDBDB"
+                            VerticalAlignment="Bottom"/>
+
+                        <ScrollViewer
+                            Grid.Row="2"
+                            x:Name="scv_pacientes"
+                            VerticalScrollBarVisibility="Auto">
+
+                            <StackPanel
+                                x:Name="stp_pacientes"
+                                Margin="0 8 0 8"/>
+
+                        </ScrollViewer>
 
                     </Grid>
 
-                    <Separator
-                        Grid.Row="0"
-                        Margin="0 0 0 0"
-                        Background="#DBDBDB"
-                        VerticalAlignment="Bottom"/>
-
-                    <ScrollViewer
-                        Grid.Row="2"
-                        VerticalScrollBarVisibility="Auto">
-
-                        <StackPanel
-                            Grid.Row="2"
-                            x:Name="stp_pacientes"
-                            Margin="0 8 0 8"/>
-
-                    </ScrollViewer>
-
                 </Grid>
-                
+
             </materialDesign:Card>
 
         </Grid>

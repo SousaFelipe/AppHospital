@@ -21,7 +21,7 @@ namespace View.Adapter
 
         public override void Build()
         {
-            if (Dataset != null)
+            if (Container != null && Dataset != null)
             {
                 Container.Children.Clear();
 

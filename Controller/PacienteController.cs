@@ -8,9 +8,16 @@ namespace Controller
 {
     public class PacienteController
     {
-        public List<Paciente> Listar(int min, int max)
+        public List<Paciente> ListarPermanentes(int min, int max)
         {
-            return new PacienteData().Listar(min, max);
+            return new PacienteData().Listar(Paciente.Listagem.Permanentes, min, max);
+        }
+
+
+
+        public List<Paciente> ListarTodos(int min, int max)
+        {
+            return new PacienteData().Listar(Paciente.Listagem.Todos, min, max);
         }
 
 
@@ -29,9 +36,16 @@ namespace Controller
 
 
 
-        public int Contar(Paciente.Contador contador)
+        public int ContarPermanentes()
         {
-            return new PacienteData().Contar(contador); 
+            return new PacienteData().Contar(Paciente.Listagem.Permanentes);
+        }
+
+
+
+        public int ContarTodos()
+        {
+            return new PacienteData().Contar(Paciente.Listagem.Todos);
         }
 
 

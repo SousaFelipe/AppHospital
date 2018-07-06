@@ -15,6 +15,13 @@ namespace Model
 
 
 
+        public enum Listagem
+        {
+            Permanentes, Todos
+        }
+
+
+
         public enum Contador
         {
             MaxID, Quantidade

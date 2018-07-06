@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using System.Windows.Controls;
 
 using View.Adapter;
 using View.Components;
@@ -9,14 +10,17 @@ namespace View
 {
     public partial class Window : System.Windows.Window
     {
-        private PacienteViewAdapter     ViewAdapter { get; set; }
-        private PacientePagesAdapter    PagesAdapter { get; set; }
+        private Pagination PageSystem { get; set; }
+
+        private PacienteViewAdapter  ViewAdapter { get; set; }
+        private PacientePagesAdapter PagesAdapter { get; set; }
 
 
 
         public Window()
         {
             InitializeComponent();
+            Single.SetMainWindow(this);
             Refresh();
         }
 
@@ -24,6 +28,11 @@ namespace View
 
         public void Refresh()
         {
+            PageSystem = new Pagination(stp_pacientes, stp_pages)
+            {
+                Owner = this
+            };
+
             ViewAdapter = new PacienteViewAdapter(this, stp_pacientes);
             PagesAdapter = new PacientePagesAdapter(this, stp_pages, ViewAdapter);
             PagesAdapter.Build();
@@ -56,6 +65,13 @@ namespace View
         private void NextItem_Click(object sender, RoutedEventArgs e)
         {
             PagesAdapter.Next();
+        }
+
+
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh();
         }
     }
 }
