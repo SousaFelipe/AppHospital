@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-using Controller;
 using Model;
-using View.Components;
+using Controller;
+using View.Components.ItemViews;
 
 
 namespace View.Adapter
@@ -19,7 +19,7 @@ namespace View.Adapter
 
 
 
-        private PacienteViewAdapter ViewAdapter { get; set; }
+        public PacienteViewAdapter ViewAdapter { get; set; }
 
 
 
@@ -27,7 +27,7 @@ namespace View.Adapter
         {
             get
             {
-                int count = (Owner.cbx_modo.SelectedIndex <= 0)
+                int count = (Single.MainWindow.cbx_modo.SelectedIndex <= 0)
                     ? new PacienteController().ContarPermanentes()
                     : new PacienteController().ContarTodos();
 
@@ -39,10 +39,7 @@ namespace View.Adapter
 
 
 
-        public PacientePagesAdapter(Window owner, StackPanel container, PacienteViewAdapter viewAdapter) : base(owner, container)
-        {
-            ViewAdapter = viewAdapter;
-        }
+        public PacientePagesAdapter(StackPanel container) : base(container) { }
 
 
 
@@ -74,7 +71,7 @@ namespace View.Adapter
         {
             PageItemView itemView = ((PageItemView)Container.Children[index]);
 
-            ViewAdapter.Dataset = (Owner.cbx_modo.SelectedIndex <= 0)
+            ViewAdapter.Dataset = (Single.MainWindow.cbx_modo.SelectedIndex <= 0)
                 ? new PacienteController().ListarPermanentes(itemView.Range[0], itemView.Range[1])
                 : new PacienteController().ListarTodos(itemView.Range[0], itemView.Range[1]);
 
@@ -128,8 +125,9 @@ namespace View.Adapter
             if (Single.MainWindow.cbx_modo.SelectedIndex <= 0)
             {
                 int[] ids = null;
-                PacienteController controller = new PacienteController();
-                List<Paciente> pacientes = controller.ListarPermanentes(1, controller.ContarTodos());
+
+                PacienteController  controller  = new PacienteController();
+                List<Paciente>      pacientes   = controller.ListarPermanentes(1, controller.ContarTodos());
 
                 if (pacientes != null)
                 {
@@ -156,11 +154,25 @@ namespace View.Adapter
             }
             else
             {
-                for (int i = 1; i <= PageCount; i++)
+                int count  = 0;
+                for (int i = PageCount; count < PageCount; i--)
                 {
-                    ((PageItemView)Container.Children[i - 1]).SetRange((PATIENTS_PER_PAGE * i) - 5, (PATIENTS_PER_PAGE * i));
+                    ((PageItemView)Container.Children[count]).SetRange(
+                        MoveRange((PATIENTS_PER_PAGE * i) - 5), MoveRange(PATIENTS_PER_PAGE * i)
+                    );
+
+                    count++;
                 }
             }
+        }
+
+
+
+        private int MoveRange(int range)
+        {
+            int max = new PacienteController().ContarTodos();
+            int dif = (PageCount * PATIENTS_PER_PAGE) - max;
+            return ((range - dif) < 1) ? 1 : range - dif;
         }
 
 

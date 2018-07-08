@@ -24,7 +24,7 @@ namespace Data
                           "WHERE internacoes.data_saida IS NULL AND pacientes.id BETWEEN " + min + " AND " + max + " " +
                           "ORDER BY pacientes.nome ASC"
                         
-                        : "SELECT * FROM pacientes WHERE id BETWEEN " + min + " AND " + max + " ORDER BY pacientes.nome ASC";
+                        : "SELECT * FROM pacientes WHERE id BETWEEN " + min + " AND " + max + " ORDER BY pacientes.id DESC";
 
                     using (MyCommand = new MySqlCommand(sql, MyConnection))
                     {
@@ -147,8 +147,6 @@ namespace Data
                     MyReader.Close();
                 }
             }
-
-            return -1; 
         }
 
 

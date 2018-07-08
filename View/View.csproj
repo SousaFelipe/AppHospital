@@ -66,22 +66,21 @@
     </ApplicationDefinition>
     <Compile Include="Adapter\PacientePagesAdapter.cs" />
     <Compile Include="Adapter\PacienteViewAdapter.cs" />
-    <Compile Include="Adapter\Pagination.cs" />
     <Compile Include="Adapter\StackPanelAdapter.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Components\PacienteDialog.xaml.cs">
+    <Compile Include="Components\Dialogs\PacienteDialog.xaml.cs">
       <DependentUpon>PacienteDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\NovoPacienteDialog.xaml.cs">
+    <Compile Include="Components\Dialogs\NovoPacienteDialog.xaml.cs">
       <DependentUpon>NovoPacienteDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\PacienteItemView.xaml.cs">
+    <Compile Include="Components\ItemViews\PacienteItemView.xaml.cs">
       <DependentUpon>PacienteItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\PageItemView.xaml.cs">
+    <Compile Include="Components\ItemViews\PageItemView.xaml.cs">
       <DependentUpon>PageItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Path.cs" />
@@ -118,19 +117,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Components\PacienteDialog.xaml">
+    <Page Include="Components\Dialogs\PacienteDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Components\NovoPacienteDialog.xaml">
+    <Page Include="Components\Dialogs\NovoPacienteDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Components\PacienteItemView.xaml">
+    <Page Include="Components\ItemViews\PacienteItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Components\PageItemView.xaml">
+    <Page Include="Components\ItemViews\PageItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,9 +179,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\Dialog\" />
-    <Folder Include="Components\ItemView\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
 using Model;
-using View.Components;
+using View.Components.ItemViews;
 
 
 namespace View.Adapter
@@ -15,7 +15,7 @@ namespace View.Adapter
 
 
 
-        public PacienteViewAdapter(Window owner, StackPanel container) : base(owner, container) { }
+        public PacienteViewAdapter(StackPanel container) : base(container) { }
 
 
 
@@ -27,7 +27,7 @@ namespace View.Adapter
 
                 foreach (Paciente paciente in Dataset)
                 {
-                    PacienteItemView itemView = new PacienteItemView(this);
+                    PacienteItemView itemView = new PacienteItemView();
 
                     itemView.icn_sexo.Source = (paciente.Sexo == 0)
                         ? new BitmapImage(new Uri(Path.Resources + "menina.png"))

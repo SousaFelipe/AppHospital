@@ -1,25 +1,25 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Controls;
 
 using View.Adapter;
 
 
-namespace View.Components
+namespace View.Components.ItemViews
 {
     public partial class PageItemView : UserControl
     {
-        public PacientePagesAdapter Adapter     { get; private set; }
-        public int[]                Range       { get; private set; }
-        public bool                 Selected    { get; private set; }
-        public int                  Index       { get; set; }
+        private PacientePagesAdapter Owner      { get; set; }
+        public int[]                 Range      { get; private set; }
+        public bool                  Selected   { get; private set; }
+        public int                   Index      { get; set; }
 
 
 
-        public PageItemView(PacientePagesAdapter adapter)
+        public PageItemView(PacientePagesAdapter owner)
         {
             InitializeComponent();
-            Adapter = adapter;
+            Owner = owner;
             Range = new int[2];
         }
 
@@ -57,7 +57,7 @@ namespace View.Components
         {
             if (!Selected)
             {
-                Adapter.Load(Index);
+                Owner.Load(Index);
             }
         }
     }

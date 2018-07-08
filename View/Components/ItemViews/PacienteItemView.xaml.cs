@@ -7,17 +7,13 @@ using System.Windows.Threading;
 
 using Model;
 using Controller;
-using View.Adapter;
+using View.Components.Dialogs;
 
 
-namespace View.Components
+namespace View.Components.ItemViews
 {
     public partial class PacienteItemView : UserControl
     {
-        public PacienteViewAdapter  Adapter { get; private set; }
-
-
-
         public Paciente Item
         {
             get
@@ -30,11 +26,9 @@ namespace View.Components
 
 
 
-        public PacienteItemView(PacienteViewAdapter adapter)
+        public PacienteItemView()
         {
             InitializeComponent();
-
-            Adapter = adapter;
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(MouseObserver);
@@ -65,7 +59,7 @@ namespace View.Components
 
         private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            PacienteDialog dialog = new PacienteDialog(Adapter.Owner);
+            PacienteDialog dialog = new PacienteDialog();
             dialog.CarregarPaciente(Item.ID);
             dialog.Show();
         }
@@ -83,7 +77,7 @@ namespace View.Components
             }
             else if (item.Name.Equals("edit"))
             {
-                new NovoPacienteDialog(Adapter.Owner).Show(Item);
+                new NovoPacienteDialog().Show(Item);
             }
             else if (item.Name.Equals("delete"))
             {
@@ -105,7 +99,7 @@ namespace View.Components
             if (result == MessageBoxResult.Yes)
             {
                 MessageBox.Show(new PacienteController().Remover(Item.ID), "Removendo paciente...", MessageBoxButton.OK, MessageBoxImage.Information);
-                Adapter.Owner.Refresh();
+                Single.MainWindow.Refresh();
             }
         }
     }
