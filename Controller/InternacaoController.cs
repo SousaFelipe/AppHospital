@@ -3,6 +3,7 @@
 using Data;
 using Model;
 
+
 namespace Controller
 {
     public class InternacaoController
@@ -16,7 +17,7 @@ namespace Controller
 
         public bool PacienteInternado(int id)
         {
-            return false;
+            return new InternacaoData().PacienteInternado(id);
         }
     }
 }

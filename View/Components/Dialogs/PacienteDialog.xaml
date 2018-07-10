@@ -47,13 +47,13 @@
             Background="White"
             materialDesign:ShadowAssist.ShadowDepth="Depth5">
 
-            <Grid Grid.Row="1">
+            <Grid>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Grid.Background>
@@ -271,7 +271,12 @@
 
                 </Grid>
 
-                <Separator Grid.Row="2" Height="1" Margin="104 0 24 0" Background="#DBDBDB" VerticalAlignment="Top"/>
+                <Separator
+                    Grid.Row="2"
+                    Height="1"
+                    Margin="104 0 24 0"
+                    Background="#DBDBDB"
+                    VerticalAlignment="Top"/>
 
                 <Grid Grid.Row="2">
 
@@ -342,20 +347,75 @@
 
                 </Grid>
 
-                <Grid
+                <Expander
                     Grid.Row="3"
-                    Margin="24 8 8 8">
+                    Header="INTERNAÇÕES">
 
-                    <Button
-                        Grid.Column="1"
-                        MinWidth="64"
-                        Padding="8" Margin="4 0 0 0"
-                        HorizontalAlignment="Right"
-                        Click="Button_Click">
-                        OK
-                    </Button>
+                    <Grid>
 
-                </Grid>
+                        <TextBlock
+                            x:Name="tbk_nenhuma_in"
+                            Text="Nenhuma internação!"
+                            FontSize="16" Foreground="#DBDBDB"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        <Grid
+                            Visibility="Hidden"
+                            x:Name="grd_internacoes">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="49"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid
+                                Grid.Row="0"
+                                Height="48">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="96"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Text="Causa" Foreground="#757575"/>
+
+                                <TextBlock
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Text="Entrada" Foreground="#757575"/>
+
+                                <TextBlock
+                                    Grid.Column="3"
+                                    VerticalAlignment="Center"
+                                    Text="Alta" Foreground="#757575"/>
+
+                            </Grid>
+
+                            <Separator
+                                Grid.Row="0"
+                                Height="1"
+                                Margin="0"
+                                Background="#DBDBDB"
+                                VerticalAlignment="Bottom"/>
+
+                            <StackPanel
+                                Grid.Row="1"
+                                x:Name="stp_internacoes"
+                                Orientation="Vertical"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"/>
+                        
+                        </Grid>
+
+                    </Grid>
+
+                </Expander>
 
             </Grid>
 

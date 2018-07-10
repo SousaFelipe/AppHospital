@@ -1,0 +1,104 @@
+﻿<UserControl
+    x:Class="View.Components.ItemViews.InternacaoItemView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="14"
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"        
+    Background="Transparent"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    mc:Ignorable="d" 
+    d:DesignHeight="48" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <VisualBrush x:Key="Note">
+            <VisualBrush.Visual>
+                <Grid>
+                    <Image
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Source="/AppHospital;component/Resources/note_dark.png"/>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </UserControl.Resources>
+
+    <Grid
+        Height="48">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="96"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid
+            Grid.Column="0">
+
+            <materialDesign:ColorZone
+                Width="32" Height="32"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                CornerRadius="16"
+                Background="#DBDBDB"/>
+
+            <TextBlock
+                x:Name="tbk_leito"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                FontSize="16"
+                Foreground="#212121"
+                TextAlignment="Center"/>
+
+        </Grid>
+
+        <TextBlock
+            Grid.Column="1"
+            x:Name="tbk_causa"
+            Foreground="#212121"
+            VerticalAlignment="Center"/>
+
+        <TextBlock
+            Grid.Column="2"
+            x:Name="tbk_entrada"
+            Foreground="#212121"
+            VerticalAlignment="Center"/>
+
+        <TextBlock
+            Grid.Column="3"
+            x:Name="tbk_saida"
+            Foreground="#212121"
+            VerticalAlignment="Center"/>
+
+        <Grid
+            Visibility="Hidden"
+            x:Name="grd_note"
+            Grid.Column="3"
+            HorizontalAlignment="Right">
+
+            <Menu
+                Width="24"
+                Height="24"
+                Margin="8 0 24 0"
+                Background="Transparent"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right">
+                <MenuItem
+                    Width="24"
+                    Height="24"
+                    Background="{ StaticResource Note }"
+                    Click="MenuItem_Click">
+                </MenuItem>
+            </Menu>
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>

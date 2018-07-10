@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Adapter\InternacaoViewAdapter.cs" />
     <Compile Include="Adapter\PacientePagesAdapter.cs" />
     <Compile Include="Adapter\PacienteViewAdapter.cs" />
     <Compile Include="Adapter\StackPanelAdapter.cs" />
@@ -76,6 +77,9 @@
     </Compile>
     <Compile Include="Components\Dialogs\NovoPacienteDialog.xaml.cs">
       <DependentUpon>NovoPacienteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ItemViews\InternacaoItemView.xaml.cs">
+      <DependentUpon>InternacaoItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\ItemViews\PacienteItemView.xaml.cs">
       <DependentUpon>PacienteItemView.xaml</DependentUpon>
@@ -124,6 +128,10 @@
     <Page Include="Components\Dialogs\NovoPacienteDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Components\ItemViews\InternacaoItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\ItemViews\PacienteItemView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +189,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\note_dark.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -56,7 +56,7 @@ namespace View.Components.ItemViews
             }
             else
             {
-                Background = null;
+                Background = new SolidColorBrush(Colors.Transparent);
                 grd_controles.Visibility = Visibility.Hidden;
             }
         }
@@ -67,6 +67,8 @@ namespace View.Components.ItemViews
         {
             PacienteDialog dialog = new PacienteDialog(Owner.Owner.Owner);
             dialog.CarregarPaciente(Item.ID);
+            dialog.ExibirInformacoes();
+            dialog.ListarInternacoes();
             dialog.Show();
         }
 

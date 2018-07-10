@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 
 using Model;
 using Controller;
+using View.Adapter;
 
 
 namespace View.Components.Dialogs
@@ -42,36 +43,55 @@ namespace View.Components.Dialogs
         {
             Atual = new PacienteController().Buscar(new string[] { "id" }, new string[] { id.ToString() });
 
-
-
-            if (Atual == null)
+            if (new InternacaoController().PacienteInternado(Atual.ID))
             {
-                MessageBox.Show("Paciente desconhecido!", "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ctrl_ex.Visibility = Visibility.Hidden;
+                ctrl_in.Visibility = Visibility.Visible;
             }
             else
             {
-                icn_sexo.Source = (Atual.Sexo == 0)
-                    ? new BitmapImage(new Uri(Path.Resources + "menina.png"))
-                    : new BitmapImage(new Uri(Path.Resources + "menino.png"));
-
-                tbk_nome.Text = Atual.Nome;
-                tbk_data_nascimento.Text = Atual.DataNascimento.ToString("dd/MM/yyyy");
-                tbk_cartao_sus.Text = string.Format("{0:### #### #### ####}", Convert.ToInt64(Atual.CartaoSus));
-                tbk_responsavel.Text = Atual.Responsavel;
-                tbk_telefone.Text = string.Format("{0:(##) # ####-####}", Convert.ToInt64(Atual.Telefone));
-                tbk_bairro.Text = Atual.Endereco[0];
-                tbk_rua.Text = Atual.Endereco[1];
-
-                if (string.IsNullOrEmpty(Atual.Endereco[2]))
-                {
-                    tbk_sub_rua.Text = "Rua/Localidade";
-                }
-                else
-                {
-                    tbk_sub_rua.Text = "Rua/Localidade - N°";
-                    tbk_rua.Text += " - " + Atual.Endereco[2];
-                }
+                ctrl_in.Visibility = Visibility.Hidden;
+                ctrl_ex.Visibility = Visibility.Visible;
             }
+        }
+
+
+
+        public void ExibirInformacoes()
+        {
+            icn_sexo.Source = (Atual.Sexo == 0)
+                ? new BitmapImage(new Uri(Path.Resources + "menina.png"))
+                : new BitmapImage(new Uri(Path.Resources + "menino.png"));
+
+            tbk_nome.Text = Atual.Nome;
+            tbk_data_nascimento.Text = Atual.DataNascimento.ToString("dd/MM/yyyy");
+            tbk_cartao_sus.Text = string.Format("{0:### #### #### ####}", Convert.ToInt64(Atual.CartaoSus));
+            tbk_responsavel.Text = Atual.Responsavel;
+            tbk_telefone.Text = string.Format("{0:(##) # ####-####}", Convert.ToInt64(Atual.Telefone));
+            tbk_bairro.Text = Atual.Endereco[0];
+            tbk_rua.Text = Atual.Endereco[1];
+
+            if (string.IsNullOrEmpty(Atual.Endereco[2]))
+            {
+                tbk_sub_rua.Text = "Rua/Localidade";
+            }
+            else
+            {
+                tbk_sub_rua.Text = "Rua/Localidade - N°";
+                tbk_rua.Text += " - " + Atual.Endereco[2];
+            }
+        }
+
+
+
+        public void ListarInternacoes()
+        {
+            InternacaoViewAdapter adapter = new InternacaoViewAdapter(stp_internacoes);
+            adapter.Dataset = new InternacaoController().Listar(Atual.ID);
+            adapter.Build();
+
+            tbk_nenhuma_in.Visibility = (adapter.Container.Children.Count > 0) ? Visibility.Hidden : Visibility.Visible;
+            grd_internacoes.Visibility = (adapter.Container.Children.Count > 0) ? Visibility.Visible : Visibility.Hidden;
         }
 
 
