@@ -74,6 +74,7 @@
 
                     <Menu
                         Grid.Column="1"
+                        x:Name="ctrl_ex"
                         Width="24" Height="24"
                         Margin="24 0" Background="Transparent"
                         HorizontalAlignment="Right" VerticalAlignment="Top">
@@ -82,12 +83,50 @@
                             Height="24"
                             Background="{ StaticResource Menu }">
                             <MenuItem
-                                x:Name="itm_editar"
+                                Header="Internar"
+                                Background="White"
+                                Click="MenuItem_Click"/>
+                            <Separator
+                                Height="1"
+                                Margin="0"
+                                Background="#DBDBDB"
+                                VerticalAlignment="Top"/>
+                            <MenuItem
                                 Header="Editar"
                                 Background="White"
                                 Click="MenuItem_Click"/>
                             <MenuItem
-                                x:Name="itm_remover"
+                                Header="Remover"
+                                Background="White"
+                                Click="MenuItem_Click"/>
+                        </MenuItem>
+                    </Menu>
+
+                    <Menu
+                        Grid.Column="1"
+                        x:Name="ctrl_in"
+                        Width="24" Height="24"
+                        Visibility="Hidden"
+                        Margin="24 0" Background="Transparent"
+                        HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <MenuItem
+                            Width="24"
+                            Height="24"
+                            Background="{ StaticResource Menu }">
+                            <MenuItem
+                                Header="Alta"
+                                Background="White"
+                                Click="MenuItem_Click"/>
+                            <Separator
+                                Height="1"
+                                Margin="0"
+                                Background="#DBDBDB"
+                                VerticalAlignment="Top"/>
+                            <MenuItem
+                                Header="Editar"
+                                Background="White"
+                                Click="MenuItem_Click"/>
+                            <MenuItem
                                 Header="Remover"
                                 Background="White"
                                 Click="MenuItem_Click"/>
@@ -155,7 +194,12 @@
 
                 </Grid>
 
-                <Separator Grid.Row="1" Height="1" Margin="104 0 24 0" Background="#DBDBDB" VerticalAlignment="Top"/>
+                <Separator
+                    Grid.Row="1"
+                    Height="1"
+                    Margin="104 0 24 0"
+                    Background="#DBDBDB"
+                    VerticalAlignment="Top"/>
 
                 <Grid Grid.Row="1">
 

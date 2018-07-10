@@ -42,6 +42,8 @@ namespace View.Components.Dialogs
         {
             Atual = new PacienteController().Buscar(new string[] { "id" }, new string[] { id.ToString() });
 
+
+
             if (Atual == null)
             {
                 MessageBox.Show("Paciente desconhecido!", "Erro", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -138,12 +140,22 @@ namespace View.Components.Dialogs
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (((MenuItem)sender).Name.Equals("itm_editar"))
+            MenuItem menuItem = ((MenuItem)sender);
+
+            if (menuItem.Header.Equals("Internar"))
+            {
+
+            }
+            else if (menuItem.Header.Equals("Alta"))
+            {
+
+            }
+            else if (menuItem.Header.Equals("Editar"))
             {
                 Hide();
                 new NovoPacienteDialog(Owner).Show(Atual);
             }
-            else if (((MenuItem)sender).Name.Equals("itm_remover"))
+            else if (menuItem.Header.Equals("Remover"))
             {
                 MessageBoxResult result = MessageBox.Show(
                     "Você realmente deseja remover este Paciente?\nEsta ação é ireversível!",
