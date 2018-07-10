@@ -57,7 +57,7 @@ namespace View.Components.ItemViews
         {
             if (!Selected)
             {
-                Owner.Load(Index);
+                Owner.UpdateByIndex(Index);
             }
         }
     }

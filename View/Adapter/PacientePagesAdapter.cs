@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Controls;
 
-using Model;
-using Controller;
+using View.Components;
 using View.Components.ItemViews;
 
 
@@ -12,30 +9,11 @@ namespace View.Adapter
 {
     public class PacientePagesAdapter : StackPanelAdapter
     {
-        /// <summary>
-        /// Quantidade de pacientes por página
-        /// </summary>
         public const int PATIENTS_PER_PAGE = 6;
-
-
-
-        public PacienteViewAdapter ViewAdapter { get; set; }
-
-
-
-        public int PageCount
-        {
-            get
-            {
-                int count = (Single.MainWindow.cbx_modo.SelectedIndex <= 0)
-                    ? new PacienteController().ContarPermanentes()
-                    : new PacienteController().ContarTodos();
-
-                decimal ceiling = Math.Ceiling((decimal)(count / PATIENTS_PER_PAGE));
-
-                return Convert.ToInt32(ceiling) + ((ceiling * PATIENTS_PER_PAGE < count) ? 1 : 0);
-            }
-        }
+        
+        public Pagination   Owner       { get; set; }
+        public int          MaxRange    { get; private set; }
+        public int          PageCount   { get; private set; }
 
 
 
@@ -43,14 +21,23 @@ namespace View.Adapter
 
 
 
-        public void Previous()
+        public void Update(int count)
         {
-            PageItemView current = Current();
+            decimal ceiling = Math.Ceiling((decimal)(count / PATIENTS_PER_PAGE));
+            PageCount = Convert.ToInt32(ceiling) + ((ceiling * PATIENTS_PER_PAGE < count) ? 1 : 0);
+            MaxRange = (count - 1);
+        }
 
-            if (current != null && current.Index > 0)
-            {
-                Load(current.Index - 1);
-            }
+
+
+        public void UpdateByIndex(int index)
+        {
+            ClearSelection();
+
+            PageItemView itemView = GetItem(index);
+            itemView.Select();
+            
+            Owner.UpdataWithRange(itemView.Range);
         }
 
 
@@ -58,27 +45,73 @@ namespace View.Adapter
         public void Next()
         {
             PageItemView current = Current();
+            PageItemView next = GetItem(current.Index + 1);
 
-            if (current != null && current.Index < (Container.Children.Count - 1))
+            if (next != null)
             {
-                Load(current.Index + 1);
+                UpdateByIndex(next.Index);
             }
         }
 
 
 
-        public void Load(int index)
+        public void Previous()
         {
-            PageItemView itemView = ((PageItemView)Container.Children[index]);
+            PageItemView current = Current();
+            PageItemView previous = GetItem(current.Index - 1);
 
-            ViewAdapter.Dataset = (Single.MainWindow.cbx_modo.SelectedIndex <= 0)
-                ? new PacienteController().ListarPermanentes(itemView.Range[0], itemView.Range[1])
-                : new PacienteController().ListarTodos(itemView.Range[0], itemView.Range[1]);
+            if (previous != null)
+            {
+                UpdateByIndex(previous.Index);
+            }
+        }
 
-            ViewAdapter.Build();
 
-            Current().Reject();
-            itemView.Select();
+
+        public PageItemView Current()
+        {
+            if (Container != null && Container.Children.Count > 0)
+            {
+                for (int i = 0; i < Container.Children.Count; i++)
+                {
+                    PageItemView iv = ((PageItemView)Container.Children[i]);
+                    if (iv.Selected) return iv;
+                }
+            }
+
+            return null;
+        }
+
+
+
+        public PageItemView GetItem(int index)
+        {
+            int limit = (Container != null) ? (Container.Children.Count - 1) : -999;
+
+            if (index >= 0 && index <= limit)
+            {
+                for (int i = 0; i <= limit; i++)
+                {
+                    PageItemView iv = ((PageItemView)Container.Children[i]);
+                    if (iv.Index == index) return iv;
+                }
+            }
+
+            return null;
+        }
+
+
+
+        public void ClearSelection()
+        {
+            if (Container != null && Container.Children.Count > 0)
+            {
+                for (int i = 0; i < Container.Children.Count; i++)
+                {
+                    PageItemView iv = ((PageItemView)Container.Children[i]);
+                    if (iv.Selected) iv.Reject();
+                }
+            }
         }
 
 
@@ -89,16 +122,13 @@ namespace View.Adapter
             {
                 Container.Children.Clear();
 
-                for (int i = 1; i <= PageCount; i++)
+                for (int i = 0; i < PageCount; i++)
                 {
-                    PageItemView itemView = new PageItemView(this)
-                    {
-                        Index = (i - 1)
-                    };
+                    PageItemView itemView = new PageItemView(this);
+                    itemView.txt_posicao.Text = Convert.ToString(i + 1);
+                    itemView.Index = i;
 
-                    itemView.txt_posicao.Text = i.ToString();
-
-                    if (i == 1)
+                    if (i == 0)
                     {
                         itemView.Select();
                     }
@@ -106,86 +136,30 @@ namespace View.Adapter
                     Container.Children.Add(itemView);
                 }
 
-                BuildRange();
-
-                Single.MainWindow.grd_pacientes.Visibility = (Container.Children.Count <= 0) ? Visibility.Hidden : Visibility.Visible;
-                Single.MainWindow.tbk_pacientes.Visibility = (Container.Children.Count <= 0) ? Visibility.Visible : Visibility.Hidden;
-
-                if (Container.Children.Count > 0)
-                {
-                    Load(0);
-                }
+                CreateRange();
             }
         }
 
 
 
-        private void BuildRange()
+        private void CreateRange()
         {
-            if (Single.MainWindow.cbx_modo.SelectedIndex <= 0)
+            int min = 0;
+            int max = 0;
+
+            for (int i = 1; i <= Container.Children.Count; i++)
             {
-                int[] ids = null;
+                min = ((PATIENTS_PER_PAGE * i) - PATIENTS_PER_PAGE);
+                max = ((PATIENTS_PER_PAGE * i) - 1);
 
-                PacienteController  controller  = new PacienteController();
-                List<Paciente>      pacientes   = controller.ListarPermanentes(1, controller.ContarTodos());
-
-                if (pacientes != null)
+                if (max > MaxRange)
                 {
-                    ids = new int[pacientes.Count];
-
-                    for (int i = 0; i < pacientes.Count; i++)
-                    {
-                        ids[i] = pacientes[i].ID;
-                    }
+                    int dif = (max - MaxRange);
+                    max = (max - dif);
                 }
 
-                int count  = 0;
-                for (int i = 0; count < PageCount; i += PATIENTS_PER_PAGE)
-                {
-                    int max = ((i + PATIENTS_PER_PAGE) - 1);
-
-                    ((PageItemView)Container.Children[count]).SetRange(
-                        ids[i],
-                        ids[(max > PageCount) ? PageCount : max]
-                    );
-
-                    count++;
-                }
+                ((PageItemView)Container.Children[i - 1]).SetRange(min, max);
             }
-            else
-            {
-                int count  = 0;
-                for (int i = PageCount; count < PageCount; i--)
-                {
-                    ((PageItemView)Container.Children[count]).SetRange(
-                        MoveRange((PATIENTS_PER_PAGE * i) - 5), MoveRange(PATIENTS_PER_PAGE * i)
-                    );
-
-                    count++;
-                }
-            }
-        }
-
-
-
-        private int MoveRange(int range)
-        {
-            int max = new PacienteController().ContarTodos();
-            int dif = (PageCount * PATIENTS_PER_PAGE) - max;
-            return ((range - dif) < 1) ? 1 : range - dif;
-        }
-
-
-
-        private PageItemView Current()
-        {
-            for (int i = 0; i < Container.Children.Count; i++)
-            {
-                PageItemView itemView = ((PageItemView)Container.Children[i]);
-                if (itemView.Selected) return itemView;
-            }
-
-            return null;
         }
     }
 }

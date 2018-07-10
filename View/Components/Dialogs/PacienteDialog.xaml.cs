@@ -13,6 +13,7 @@ namespace View.Components.Dialogs
 {
     public partial class PacienteDialog : UserControl
     {
+        private Window          Owner { get; set; }
         private DispatcherTimer Timer { get; set; }
         private Paciente        Atual { get; set; }
 
@@ -23,15 +24,16 @@ namespace View.Components.Dialogs
         {
             get
             {
-                return (Single.MainWindow != null) ? ((Grid)Single.MainWindow.Content) : null;
+                return (Owner != null) ? ((Grid)Owner.Content) : null;
             }
         }
 
 
 
-        public PacienteDialog()
+        public PacienteDialog(Window owner)
         {
             InitializeComponent();
+            Owner = owner;
         }
 
 
@@ -139,7 +141,7 @@ namespace View.Components.Dialogs
             if (((MenuItem)sender).Name.Equals("itm_editar"))
             {
                 Hide();
-                new NovoPacienteDialog().Show(Atual);
+                new NovoPacienteDialog(Owner).Show(Atual);
             }
             else if (((MenuItem)sender).Name.Equals("itm_remover"))
             {
@@ -156,7 +158,7 @@ namespace View.Components.Dialogs
                         new PacienteController().Remover(Atual.ID), "Removendo paciente...", MessageBoxButton.OK, MessageBoxImage.Information
                     );
 
-                    Single.MainWindow.Refresh();
+                    Owner.Refresh(string.Empty);
                     Hide();
                 }
             }

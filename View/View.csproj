@@ -83,8 +83,8 @@
     <Compile Include="Components\ItemViews\PageItemView.xaml.cs">
       <DependentUpon>PageItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\Pagination.cs" />
     <Compile Include="Path.cs" />
-    <Compile Include="Single.cs" />
     <Compile Include="Window.xaml.cs">
       <DependentUpon>Window.xaml</DependentUpon>
     </Compile>
@@ -179,6 +179,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\close.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

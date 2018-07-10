@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
 using Model;
+using View.Components;
 using View.Components.ItemViews;
 
 
@@ -11,11 +12,22 @@ namespace View.Adapter
 {
     public class PacienteViewAdapter : StackPanelAdapter
     {
-        public List<Paciente>   Dataset { get; set; }
+        public Pagination       Owner   { get; set; }
+        public List<Paciente>   Dataset { get; private set; }
 
 
 
-        public PacienteViewAdapter(StackPanel container) : base(container) { }
+        public PacienteViewAdapter( StackPanel container) : base(container) { }
+
+
+
+        public void Update(List<Paciente> dataset)
+        {
+            if (dataset != null)
+            {
+                Dataset = dataset;
+            }
+        }
 
 
 
@@ -27,7 +39,7 @@ namespace View.Adapter
 
                 foreach (Paciente paciente in Dataset)
                 {
-                    PacienteItemView itemView = new PacienteItemView();
+                    PacienteItemView itemView = new PacienteItemView(this);
 
                     itemView.icn_sexo.Source = (paciente.Sexo == 0)
                         ? new BitmapImage(new Uri(Path.Resources + "menina.png"))

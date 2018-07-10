@@ -9,7 +9,7 @@ namespace Data
 {
     public class PacienteData : Conexao
     {
-        public List<Paciente> Listar(Paciente.Listagem modo, int min, int max)
+        public List<Paciente> Listar(Paciente.Listagem modo)
         {
             try
             {
@@ -21,10 +21,9 @@ namespace Data
                     string sql = (modo.Equals(Paciente.Listagem.Permanentes))
                         
                         ? "SELECT * FROM pacientes INNER JOIN internacoes ON pacientes.id=internacoes.paciente " +
-                          "WHERE internacoes.data_saida IS NULL AND pacientes.id BETWEEN " + min + " AND " + max + " " +
-                          "ORDER BY pacientes.nome ASC"
+                          "WHERE internacoes.data_saida IS NULL ORDER BY pacientes.nome ASC"
                         
-                        : "SELECT * FROM pacientes WHERE id BETWEEN " + min + " AND " + max + " ORDER BY pacientes.id DESC";
+                        : "SELECT * FROM pacientes ORDER BY pacientes.nome ASC";
 
                     using (MyCommand = new MySqlCommand(sql, MyConnection))
                     {

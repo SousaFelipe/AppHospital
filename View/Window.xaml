@@ -25,7 +25,17 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="Resources/search.png"/>
+                        Source="/AppHospital;component/Resources/search.png"/>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+        <VisualBrush x:Key="Close">
+            <VisualBrush.Visual>
+                <Grid>
+                    <Image
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Source="/AppHospital;component/Resources/close.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -35,7 +45,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="Resources/menu_vertical.png"/>
+                        Source="/AppHospital;component/Resources/menu_vertical.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -45,7 +55,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="Resources/left_enabled.png"/>
+                        Source="/AppHospital;component/Resources/left_enabled.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -55,7 +65,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="Resources/right_enabled.png"/>
+                        Source="/AppHospital;component/Resources/right_enabled.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -128,43 +138,81 @@
                 Grid.Column="1">
 
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="104"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid
-                    Grid.Column="1"
-                    Margin="0 0 0 8"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Right">
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Menu
-                        Grid.Column="0"
-                        Width="24" Height="24"
-                        Margin="8 0" Background="Transparent">
-                        <MenuItem
-                            Width="24"
-                            Height="24"
-                            Background="{ StaticResource Search }"/>
-                    </Menu>
 
-                    <Menu
+                    <TextBox
+                        Grid.Column="0"
+                        x:Name="txb_pesquisa"
+                        Margin="0 0 0 8"
+                        Foreground="White"
+                        FontSize="16" Visibility="Hidden"
+                        materialDesign:HintAssist.Hint="Buscar pacientes"
+                        TextChanged="TxbPesquisa_TextChanged"/>
+
+                    <Grid
                         Grid.Column="1"
-                        Width="24" Height="24"
-                        Margin="8 0" Background="Transparent">
-                        <MenuItem
-                            Width="24"
-                            Height="24"
-                            Background="{ StaticResource Menu }">
-                            <MenuItem x:Name="itm_ajuda" Header="Ajuda" Background="White"/>
-                            <MenuItem x:Name="itm_suporte" Header="Suporte" Background="White"/>
-                        </MenuItem>
-                    </Menu>
+                        Margin="0 0 0 8"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Menu
+                            Grid.Column="0"
+                            x:Name="menu_open_search"
+                            Width="24" Height="24"
+                            Margin="8 0" Background="Transparent">
+                            <MenuItem
+                                x:Name="search"
+                                Width="24"
+                                Height="24"
+                                Background="{ StaticResource Search }"
+                                Click="MenuSearch_Click"/>
+                        </Menu>
+
+                        <Menu
+                            Grid.Column="0"
+                            x:Name="menu_close_search"
+                            Width="24" Height="24" Visibility="Hidden"
+                            Margin="8 0" Background="Transparent">
+                            <MenuItem
+                                x:Name="close"
+                                Width="24"
+                                Height="24"
+                                Background="{ StaticResource Close }"
+                                Click="MenuSearch_Click"/>
+                        </Menu>
+
+                        <Menu
+                            Grid.Column="1"
+                            Width="24" Height="24"
+                            Margin="8 0" Background="Transparent">
+                            <MenuItem
+                                Width="24"
+                                Height="24"
+                                Background="{ StaticResource Menu }">
+                                <MenuItem x:Name="itm_ajuda" Header="Ajuda" Background="White"/>
+                                <MenuItem x:Name="itm_suporte" Header="Suporte" Background="White"/>
+                            </MenuItem>
+                        </Menu>
+
+                    </Grid>
 
                 </Grid>
                 
@@ -189,7 +237,7 @@
                         Visibility="Hidden"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Text="Nenhum paciente registrado!"
+                        Text="Nenhum paciente encontrado!"
                         Foreground="#DBDBDB" FontSize="26"/>
 
                     <Grid
@@ -282,7 +330,8 @@
                     <Image
                         Width="24" Height="24"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center" Source="Resources/plus.png"/>
+                        VerticalAlignment="Center"
+                        Source="/AppHospital;component/Resources/plus.png"/>
 
                 </Grid>
 

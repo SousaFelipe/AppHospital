@@ -12,6 +12,7 @@ namespace View.Components.Dialogs
 {
     public partial class NovoPacienteDialog : UserControl
     {
+        private Window          Owner { get; set; }
         private DispatcherTimer Timer { get; set; }
 
 
@@ -20,15 +21,16 @@ namespace View.Components.Dialogs
         {
             get
             {
-                return (Single.MainWindow != null) ? ((Grid)Single.MainWindow.Content) : null;
+                return (Owner != null) ? ((Grid)Owner.Content) : null;
             }
         }
 
 
 
-        public NovoPacienteDialog()
-        {
+        public NovoPacienteDialog(Window owner)
+        {   
             InitializeComponent();
+            Owner = owner;
         }
 
 
@@ -145,7 +147,7 @@ namespace View.Components.Dialogs
                     new PacienteController().Inserir(paciente), "Salvando paciente...", MessageBoxButton.OK, MessageBoxImage.Information
                 );
 
-                Single.MainWindow.Refresh();
+                Owner.Refresh(string.Empty);
             }
             else if (button.Content.Equals("CANCELAR"))
             {
