@@ -60,17 +60,9 @@ namespace Controller
                 }
                 else
                 {
-                    Paciente busca = Buscar(new string[] { "nome", "responsavel" }, new string[] { paciente.Nome, paciente.Responsavel });
-
-                    if (busca != null)
-                    {
-                        paciente.ID = busca.ID;
-                        return new PacienteData().Atualizar(paciente);
-                    }
-                    else
-                    {
-                        return new PacienteData().Inserir(paciente);
-                    }
+                    return (Buscar(new string[] { "id" }, new string[] { paciente.ID.ToString() }) != null)
+                        ? new PacienteData().Atualizar(paciente)
+                        : new PacienteData().Inserir(paciente);
                 }
             }
 

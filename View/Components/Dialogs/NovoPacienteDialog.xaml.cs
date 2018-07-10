@@ -14,6 +14,7 @@ namespace View.Components.Dialogs
     {
         private Window          Owner { get; set; }
         private DispatcherTimer Timer { get; set; }
+        private Paciente        Atual { get; set; }
 
 
 
@@ -37,6 +38,8 @@ namespace View.Components.Dialogs
 
         public void Show(Paciente paciente)
         {
+            Atual = paciente;
+
             tbk_legenda.Text = "Editar paciente";
 
             txb_nome_paciente.Text = paciente.Nome;
@@ -132,6 +135,7 @@ namespace View.Components.Dialogs
             {
                 Paciente paciente = new Paciente()
                 {
+                    ID = Atual.ID,
                     Nome = txb_nome_paciente.Text,
                     DataNascimento = Convert.ToDateTime(dpk_data_nascimento.Text),
                     CartaoSus = PacienteController.Formatar(txb_cartao_sus.Text),

@@ -99,6 +99,10 @@ namespace Data
                             {
                                 return new Content().Get(MyReader);
                             }
+                            else
+                            {
+                                return null;
+                            }
                         }
                     }
                 }
@@ -109,8 +113,6 @@ namespace Data
                 MyCommand.Dispose();
                 MyReader.Close();
             }
-
-            return null;
         }
 
 
@@ -152,18 +154,15 @@ namespace Data
 
         public string Inserir(Paciente paciente)
         {
-            int id = Contar(Paciente.Listagem.Todos) + 1;
-
             try
             {
                 using (MyConnection = new MySqlConnection(ConnectionString))
                 {
                     MyConnection.Open();
 
-                    using (MyCommand = new MySqlCommand("INSERT INTO pacientes (id, nome, responsavel, data_nascimento, sexo, cartao_sus, endereco," +
-                        "telefone) VALUES (@id, @nome, @responsavel, @data_nascimento, @sexo, @cartao_sus, @endereco, @telefone)", MyConnection))
+                    using (MyCommand = new MySqlCommand("INSERT INTO pacientes (nome, responsavel, data_nascimento, sexo, cartao_sus, endereco," +
+                        "telefone) VALUES (@nome, @responsavel, @data_nascimento, @sexo, @cartao_sus, @endereco, @telefone)", MyConnection))
                     {
-                        MyCommand.Parameters.AddWithValue("@id", id);
                         MyCommand.Parameters.AddWithValue("@nome", paciente.Nome);
                         MyCommand.Parameters.AddWithValue("@responsavel", paciente.Responsavel);
                         MyCommand.Parameters.AddWithValue("@data_nascimento", paciente.DataNascimento);

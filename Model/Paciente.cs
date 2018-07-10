@@ -19,12 +19,5 @@ namespace Model
         {
             Permanentes, Todos
         }
-
-
-
-        public enum Contador
-        {
-            MaxID, Quantidade
-        }
     }
 }
