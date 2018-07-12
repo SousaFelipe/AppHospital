@@ -44,7 +44,7 @@ namespace View
             if (string.IsNullOrEmpty(search))
             {
                 pacientes = (cbx_modo.SelectedIndex <= 0)
-                    ? new PacienteController().ListarPermanentes()
+                    ? new PacienteController().ListarInternados()
                     : new PacienteController().ListarTodos();
             }
             else
@@ -100,7 +100,7 @@ namespace View
 
                 PageSystem.Update(
                     (index <= 0)
-                        ? new PacienteController().ListarPermanentes()
+                        ? new PacienteController().ListarInternados()
                         : new PacienteController().ListarTodos()
                 );
             }

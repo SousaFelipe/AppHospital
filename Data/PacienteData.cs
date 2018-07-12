@@ -18,10 +18,10 @@ namespace Data
                     MyConnection.Open();
                     List<Paciente> pacientes = new List<Paciente>();
 
-                    string sql = (modo.Equals(Paciente.Listagem.Permanentes))
+                    string sql = (modo.Equals(Paciente.Listagem.Internados))
                         
                         ? "SELECT * FROM pacientes INNER JOIN internacoes ON pacientes.id=internacoes.paciente " +
-                          "WHERE internacoes.data_saida IS NULL ORDER BY pacientes.nome ASC"
+                          "WHERE internacoes.data_saida='" + DateTime.MinValue.ToString("yyyy-MM-dd") + "' ORDER BY pacientes.nome ASC"
                         
                         : "SELECT * FROM pacientes ORDER BY pacientes.nome ASC";
 
@@ -112,41 +112,6 @@ namespace Data
                 MyConnection.Close();
                 MyCommand.Dispose();
                 MyReader.Close();
-            }
-        }
-
-
-
-        public int Contar(Paciente.Listagem modo)
-        {
-            try
-            {
-                using (MyConnection = new MySqlConnection(ConnectionString))
-                {
-                    MyConnection.Open();
-
-                    string sql = (modo.Equals(Paciente.Listagem.Permanentes))
-
-                        ? "SELECT COUNT(*) FROM pacientes INNER JOIN internacoes ON pacientes.id=internacoes.paciente " +
-                          "WHERE internacoes.data_saida IS NULL"
-
-                        : "SELECT COUNT(*) FROM pacientes";
-
-                    using (MyCommand = new MySqlCommand(sql, MyConnection))
-                    {
-                        return Convert.ToInt32(MyCommand.ExecuteScalar());
-                    }
-                }
-            }
-            finally
-            {
-                MyConnection.Close();
-                MyCommand.Dispose();
-
-                if (MyReader != null && !MyReader.IsClosed)
-                {
-                    MyReader.Close();
-                }
             }
         }
 

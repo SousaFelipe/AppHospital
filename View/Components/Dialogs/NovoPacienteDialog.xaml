@@ -220,7 +220,8 @@
                         Padding="8" Margin="0 0 4 0"
                         Style="{StaticResource MaterialDesignRaisedLightButton}"
                         HorizontalAlignment="Right"
-                        Background="Transparent" BorderThickness="0"
+                        Background="Transparent"
+                        BorderThickness="0"
                         Foreground="#E91E63"
                         Click="Button_Click">
                         CANCELAR
@@ -228,7 +229,12 @@
 
                     <Button
                         Grid.Column="1"
-                        Padding="8" Margin="4 0 0 0"
+                        Padding="8"
+                        Margin="4 0 0 0"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="#E91E63"
                         HorizontalAlignment="Right"
                         Click="Button_Click">
                         SALVAR

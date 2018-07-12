@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
 using Model;
-using Controller;
 using View.Components.ItemViews;
 
 
@@ -29,8 +27,8 @@ namespace View.Adapter
                 {
                     foreach (Internacao internacao in Dataset)
                     {
-                        InternacaoItemView itemView = new InternacaoItemView(internacao);
-                        itemView.ShowItem();
+                        InternacaoItemView itemView = new InternacaoItemView(this);
+                        itemView.ShowItem(internacao);
 
                         Container.Children.Add(itemView);
                     }

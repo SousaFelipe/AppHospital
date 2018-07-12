@@ -7,7 +7,6 @@ using System.Windows.Media.Imaging;
 
 using Model;
 using Controller;
-using View.Adapter;
 
 
 namespace View.Components.Dialogs
@@ -84,18 +83,6 @@ namespace View.Components.Dialogs
 
 
 
-        public void ListarInternacoes()
-        {
-            InternacaoViewAdapter adapter = new InternacaoViewAdapter(stp_internacoes);
-            adapter.Dataset = new InternacaoController().Listar(Atual.ID);
-            adapter.Build();
-
-            tbk_nenhuma_in.Visibility = (adapter.Container.Children.Count > 0) ? Visibility.Hidden : Visibility.Visible;
-            grd_internacoes.Visibility = (adapter.Container.Children.Count > 0) ? Visibility.Visible : Visibility.Hidden;
-        }
-
-
-
         public void Show()
         {
             int colCount = ContentOwner.ColumnDefinitions.Count;
@@ -164,15 +151,16 @@ namespace View.Components.Dialogs
 
             if (menuItem.Header.Equals("Internar"))
             {
-
+                new NovaInternacaoDialog(Owner).Show(Atual);
             }
             else if (menuItem.Header.Equals("Alta"))
             {
-
+                new AltaDialog(Owner).Show(
+                    new InternacaoController().Buscar(new string[] { "paciente" }, new string[] { Atual.ID.ToString() })
+                );
             }
             else if (menuItem.Header.Equals("Editar"))
             {
-                Hide();
                 new NovoPacienteDialog(Owner).Show(Atual);
             }
             else if (menuItem.Header.Equals("Remover"))

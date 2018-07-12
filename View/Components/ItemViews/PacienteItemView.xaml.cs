@@ -68,7 +68,6 @@ namespace View.Components.ItemViews
             PacienteDialog dialog = new PacienteDialog(Owner.Owner.Owner);
             dialog.CarregarPaciente(Item.ID);
             dialog.ExibirInformacoes();
-            dialog.ListarInternacoes();
             dialog.Show();
         }
 
@@ -77,11 +76,10 @@ namespace View.Components.ItemViews
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
-
-
+            
             if (item.Name.Equals("history"))
             {
-
+                new HistoricoDialog(Owner.Owner.Owner).Show(Item);
             }
             else if (item.Name.Equals("edit"))
             {
@@ -98,10 +96,11 @@ namespace View.Components.ItemViews
         private void Delete()
         {
             MessageBoxResult result = MessageBox.Show(
-                    "Você realmente deseja remover este Paciente?\nEsta ação é ireversível!",
-                    "Paciente",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question
+                "Você realmente deseja remover este Paciente?\nEsta ação é ireversível!",
+                "Removendo paciente...",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question,
+                MessageBoxResult.No
             );
 
             if (result == MessageBoxResult.Yes)

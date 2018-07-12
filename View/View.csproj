@@ -72,6 +72,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Components\Dialogs\AltaDialog.xaml.cs">
+      <DependentUpon>AltaDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Dialogs\HistoricoDialog.xaml.cs">
+      <DependentUpon>HistoricoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Dialogs\NovaInternacaoDialog.xaml.cs">
+      <DependentUpon>NovaInternacaoDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\Dialogs\PacienteDialog.xaml.cs">
       <DependentUpon>PacienteDialog.xaml</DependentUpon>
     </Compile>
@@ -121,6 +130,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Components\Dialogs\AltaDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Dialogs\HistoricoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Dialogs\NovaInternacaoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\Dialogs\PacienteDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -192,6 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\note_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cruz.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

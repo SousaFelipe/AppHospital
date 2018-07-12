@@ -51,13 +51,29 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Image
+        <Grid
             Grid.Column="0"
-            x:Name="icn_sexo"
-            Width="36"
-            Height="36"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center">
+
+            <Image
+                x:Name="icn_sexo"
+                Width="36"
+                Height="36"
+                Margin="4"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+
+            <Image
+                Visibility="Hidden"
+                x:Name="icn_cruz"
+                Width="16"
+                Height="16"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Source="/AppHospital;component/Resources/cruz.png"/>
+
+        </Grid>
 
         <TextBlock
             Grid.Column="1"
@@ -87,9 +103,10 @@
             Foreground="#757575"/>
 
         <Grid
+            Visibility="Hidden"
             Grid.Column="3"  
             x:Name="grd_controles"
-            Visibility="Hidden">
+            Background="#E0F7FA">
 
             <Grid
                 Margin="0 0 34 0"

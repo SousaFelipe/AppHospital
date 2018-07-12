@@ -8,9 +8,9 @@ namespace Controller
 {
     public class PacienteController
     {
-        public List<Paciente> ListarPermanentes()
+        public List<Paciente> ListarInternados()
         {
-            return new PacienteData().Listar(Paciente.Listagem.Permanentes);
+            return new PacienteData().Listar(Paciente.Listagem.Internados);
         }
 
 
@@ -32,20 +32,6 @@ namespace Controller
         public Paciente Buscar(string[] colunas, string[] valores)
         {
             return new PacienteData().Buscar(colunas, valores);
-        }
-
-
-
-        public int ContarPermanentes()
-        {
-            return new PacienteData().Contar(Paciente.Listagem.Permanentes);
-        }
-
-
-
-        public int ContarTodos()
-        {
-            return new PacienteData().Contar(Paciente.Listagem.Todos);
         }
 
 

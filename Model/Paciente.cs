@@ -17,7 +17,7 @@ namespace Model
 
         public enum Listagem
         {
-            Permanentes, Todos
+            Internados, Todos
         }
     }
 }

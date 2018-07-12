@@ -8,6 +8,13 @@ namespace Controller
 {
     public class InternacaoController
     {
+        public bool PacienteInternado(int id)
+        {
+            return new InternacaoData().PacienteInternado(id);
+        }
+
+
+
         public List<Internacao> Listar(int id)
         {
             return new InternacaoData().Listar(id);
@@ -15,9 +22,23 @@ namespace Controller
 
 
 
-        public bool PacienteInternado(int id)
+        public Internacao Buscar(string[] colunas, string[] valores)
         {
-            return new InternacaoData().PacienteInternado(id);
+            return new InternacaoData().Buscar(colunas, valores);
+        }
+
+
+
+        public string Inserir(Internacao internacao)
+        {
+            if (internacao.ID <= 0)
+            {
+                return new InternacaoData().Inserir(internacao);
+            }
+            else
+            {
+                return new InternacaoData().Atualizar(internacao);
+            }
         }
     }
 }
