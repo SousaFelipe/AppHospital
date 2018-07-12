@@ -84,6 +84,7 @@
                                 Margin="0 0 4 12"
                                 FontSize="16"
                                 Foreground="#212121"
+                                MaxLength="96"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Nome do paciente"/>
@@ -145,6 +146,7 @@
                                 Margin="0 0 4 12"
                                 FontSize="16"
                                 Foreground="#212121"
+                                MaxLength="96"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Nome do responsável"/>
@@ -154,7 +156,8 @@
                                 Grid.Row="0"
                                 x:Name="txb_telefone_responsavel"
                                 Width="130" Margin="4 0 0 12"
-                                MaxLength="16" FontSize="16"
+                                MaxLength="16"
+                                FontSize="16"
                                 Foreground="#212121"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Stretch"
@@ -176,6 +179,7 @@
                                 Margin="0 0 4 0"
                                 FontSize="16"
                                 Foreground="#212121"
+                                MaxLength="96"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Bairro ou distrito"/>
@@ -186,6 +190,7 @@
                                 Margin="4 0 4 0"
                                 FontSize="16"
                                 Foreground="#212121"
+                                MaxLength="96"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="Rua ou localidade"/>
@@ -196,6 +201,7 @@
                                 Width="50" Margin="4 0 0 0"
                                 FontSize="16"
                                 Foreground="#212121"
+                                MaxLength="45"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Stretch"
                                 materialDesign:HintAssist.Hint="N°"/>

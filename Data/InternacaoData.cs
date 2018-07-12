@@ -54,7 +54,7 @@ namespace Data
                 {
                     MyConnection.Open();
 
-                    using (MyCommand = new MySqlCommand("SELECT * FROM internacoes WHERE paciente=@paciente", MyConnection))
+                    using (MyCommand = new MySqlCommand("SELECT * FROM internacoes WHERE paciente=@paciente ORDER BY id DESC", MyConnection))
                     {
                         MyCommand.Parameters.AddWithValue("@paciente", paciente);
 
@@ -179,6 +179,36 @@ namespace Data
             catch (MySqlException)
             {
                 return ("Ocorreu um erro ao alterar os dados da internação!\nPor favor, entre em contato com o suporte.");
+            }
+            finally
+            {
+                MyConnection.Close();
+                MyCommand.Dispose();
+            }
+        }
+
+
+
+        public string Remover(int id)
+        {
+            try
+            {
+                using (MyConnection = new MySqlConnection(ConnectionString))
+                {
+                    MyConnection.Open();
+
+                    using (MyCommand = new MySqlCommand("DELETE FROM internacoes WHERE id=@id", MyConnection))
+                    {
+                        MyCommand.Parameters.AddWithValue("@id", id);
+                        MyCommand.ExecuteNonQuery();
+
+                        return ("Internação removida com sucesso!");
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                return ("Erro ao remover internação!\nPor favor, entre em contato com o suporte.");
             }
             finally
             {

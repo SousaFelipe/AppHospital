@@ -96,13 +96,7 @@ namespace View
         {
             if (PageSystem != null)
             {
-                int index = ((ComboBox)sender).SelectedIndex;
-
-                PageSystem.Update(
-                    (index <= 0)
-                        ? new PacienteController().ListarInternados()
-                        : new PacienteController().ListarTodos()
-                );
+                Refresh(string.Empty);
             }
         }
 

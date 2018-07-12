@@ -72,8 +72,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Components\Dialogs\AltaDialog.xaml.cs">
-      <DependentUpon>AltaDialog.xaml</DependentUpon>
+    <Compile Include="Components\Dialogs\InternacaoDialog.xaml.cs">
+      <DependentUpon>InternacaoDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Dialogs\HistoricoDialog.xaml.cs">
       <DependentUpon>HistoricoDialog.xaml</DependentUpon>
@@ -130,7 +130,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Components\Dialogs\AltaDialog.xaml">
+    <Page Include="Components\Dialogs\InternacaoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

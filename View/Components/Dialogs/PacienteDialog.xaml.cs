@@ -155,8 +155,14 @@ namespace View.Components.Dialogs
             }
             else if (menuItem.Header.Equals("Alta"))
             {
-                new AltaDialog(Owner).Show(
-                    new InternacaoController().Buscar(new string[] { "paciente" }, new string[] { Atual.ID.ToString() })
+                InternacaoDialog dialog = new InternacaoDialog(Owner)
+                {
+                    Dialog = InternacaoDialog.Modo.Alta
+                };
+
+                dialog.Show(
+                    new InternacaoController().Buscar(
+                        new string[] { "paciente", "data_saida" }, new string[] { Atual.ID.ToString(), DateTime.MinValue.ToString("yyyy-MM-dd") })
                 );
             }
             else if (menuItem.Header.Equals("Editar"))

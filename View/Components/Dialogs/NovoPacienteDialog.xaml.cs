@@ -135,7 +135,7 @@ namespace View.Components.Dialogs
             {
                 Paciente paciente = new Paciente()
                 {
-                    ID = Atual.ID,
+                    ID = (Atual != null) ? Atual.ID : 0,
                     Nome = txb_nome_paciente.Text,
                     DataNascimento = Convert.ToDateTime(dpk_data_nascimento.Text),
                     CartaoSus = PacienteController.Formatar(txb_cartao_sus.Text),

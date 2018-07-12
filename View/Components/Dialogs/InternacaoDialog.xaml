@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="View.Components.Dialogs.AltaDialog"
+    x:Class="View.Components.Dialogs.InternacaoDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -70,9 +70,9 @@
 
                         <TextBlock
                             Grid.Row="1"
+                            x:Name="tbk_legenda"
                             Foreground="#757575"
-                            FontSize="16"
-                            Text="Alta médica"/>
+                            FontSize="16"/>
 
                     </Grid>
 
@@ -94,8 +94,21 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
+                            <TextBox
+                                Visibility="Hidden"
+                                Grid.Column="0"
+                                x:Name="txb_causa"
+                                Margin="0 0 8 0"
+                                FontSize="16"
+                                Foreground="#212121"
+                                MaxLength="46"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Stretch"
+                                materialDesign:HintAssist.Hint="Data de saída"/>
+
                             <Grid
-                                Grid.Column="0">
+                                Grid.Column="0"
+                                x:Name="grd_info_causa">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -115,9 +128,21 @@
                                     Text="Motivo da internação"/>
 
                             </Grid>
-                            
+
+                            <DatePicker
+                                Visibility="Hidden"
+                                Grid.Column="1"
+                                x:Name="dpk_data_entrada"
+                                Margin="8 0 0 0"
+                                FontSize="16"
+                                Foreground="#212121"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Stretch"
+                                materialDesign:HintAssist.Hint="Data de entrada"/>
+
                             <Grid
-                                Grid.Column="1">
+                                Grid.Column="1"
+                                x:Name="grd_info_data">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -173,6 +198,7 @@
                                 Foreground="#212121"
                                 TextWrapping="Wrap"
                                 AcceptsReturn="True"
+                                MaxLength="255"
                                 VerticalScrollBarVisibility="Auto"
                                 HorizontalScrollBarVisibility="Disabled"
                                 VerticalAlignment="Stretch"

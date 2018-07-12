@@ -103,10 +103,11 @@
             Foreground="#757575"/>
 
         <Grid
-            Visibility="Hidden"
             Grid.Column="3"  
             x:Name="grd_controles"
-            Background="#E0F7FA">
+            Background="#E0F7FA"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Right">
 
             <Grid
                 Margin="0 0 34 0"

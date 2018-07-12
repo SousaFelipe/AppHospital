@@ -49,20 +49,27 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock
+            Visibility="Hidden"
+            x:Name="hidden"/>
+
+        <TextBlock
             Grid.Column="0"
             x:Name="tbk_causa"
+            Margin="0 0 8 0"
             Foreground="#212121"
             VerticalAlignment="Center"/>
 
         <TextBlock
             Grid.Column="1"
             x:Name="tbk_entrada"
+            Margin="0 0 8 0"
             Foreground="#212121"
             VerticalAlignment="Center"/>
 
         <TextBlock
             Grid.Column="2"
             x:Name="tbk_saida"
+            Margin="0 0 8 0"
             Foreground="#212121"
             VerticalAlignment="Center"/>
 

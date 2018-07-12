@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using Model;
 using Controller;
 using View.Adapter;
+using View.Components.Dialogs;
 
 
 namespace View.Components.ItemViews
@@ -15,7 +16,16 @@ namespace View.Components.ItemViews
     public partial class InternacaoItemView : UserControl
     {
         private InternacaoViewAdapter   Owner { get; set; }
-        private Internacao              Item  { get; set; }
+
+
+
+        private Internacao Item
+        {
+            get
+            {
+                return new InternacaoController().Buscar(new string[] { "id" }, new string[] { hidden.Text });
+            }
+        }
 
 
 
@@ -50,16 +60,6 @@ namespace View.Components.ItemViews
         }
 
 
-        public void ShowItem(Internacao internacao)
-        {
-            Item = internacao;
-
-            tbk_causa.Text = Item.Causa[0].ToString().ToUpper() + Item.Causa.Substring(1);
-            tbk_entrada.Text = Item.DataEntrada.ToString("dd/MM/yyyy");
-            tbk_saida.Text = (Item.DataSaida.Equals(DateTime.MinValue)) ? "-- -- ----" : Item.DataSaida.ToString("dd/MM/yyyy");
-        }
-
-
 
         private void Delete()
         {
@@ -73,7 +73,10 @@ namespace View.Components.ItemViews
 
             if (result == MessageBoxResult.Yes)
             {
-                MessageBox.Show(new PacienteController().Remover(Item.ID), "Removendo paciente...", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(
+                    new InternacaoController().Remover(Item.ID),"Removendo internação...", MessageBoxButton.OK, MessageBoxImage.Information
+                );
+
                 Owner.Build();
             }
         }
@@ -86,7 +89,14 @@ namespace View.Components.ItemViews
 
             if (item.Name.Equals("edit"))
             {
-                
+                InternacaoDialog dialog = new InternacaoDialog(Owner.Owner)
+                {
+                    Dialog = InternacaoDialog.Modo.Edicao
+                };
+
+                dialog.Show(
+                    new InternacaoController().Buscar(new string[] { "id" }, new string[] { hidden.Text })
+                );
             }
             else if (item.Name.Equals("delete"))
             {

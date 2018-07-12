@@ -96,6 +96,7 @@
                             Margin="0 0 4 12"
                             FontSize="16"
                             Foreground="#212121"
+                            MaxLength="46"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
                             materialDesign:HintAssist.Hint="Causa ou motivo"/>
@@ -122,6 +123,7 @@
                             Foreground="#212121"
                             TextWrapping="Wrap"
                             AcceptsReturn="True"
+                            MaxLength="255"
                             VerticalScrollBarVisibility="Auto"
                             HorizontalScrollBarVisibility="Disabled"
                             VerticalAlignment="Stretch"

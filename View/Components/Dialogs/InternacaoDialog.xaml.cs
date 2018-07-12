@@ -10,11 +10,19 @@ using Controller;
 
 namespace View.Components.Dialogs
 {
-    public partial class AltaDialog : UserControl
+    public partial class InternacaoDialog : UserControl
     {
-        private Window          Owner { get; set; }
-        private DispatcherTimer Timer { get; set; }
-        private Internacao      Atual { get; set; }
+        private Window          Owner   { get; set; }
+        private DispatcherTimer Timer   { get; set; }
+        private Internacao      Atual   { get; set; }
+        public  Modo            Dialog  { get; set; }
+
+
+
+        public enum Modo
+        {
+            Alta, Edicao
+        }
 
 
 
@@ -28,7 +36,7 @@ namespace View.Components.Dialogs
 
 
 
-        public AltaDialog(Window owner)
+        public InternacaoDialog(Window owner)
         {
             InitializeComponent();
             Owner = owner;
@@ -40,10 +48,18 @@ namespace View.Components.Dialogs
         {
             Atual = internacao;
 
+            tbk_legenda.Text = (Dialog.Equals(Modo.Alta)) ? "Alta médica" : "Editar informações";
+
+            grd_info_causa.Visibility = (Dialog.Equals(Modo.Alta)) ? Visibility.Visible : Visibility.Hidden;
+            grd_info_data.Visibility = grd_info_causa.Visibility;
+
+            txb_causa.Visibility = (grd_info_causa.Visibility.Equals(Visibility.Hidden)) ? Visibility.Visible : Visibility.Hidden;
+            dpk_data_entrada.Visibility = txb_causa.Visibility;
+
             tbk_paciente.Text = new PacienteController().Buscar(new string[] { "id" }, new string[] { internacao.Paciente.ToString() }).Nome;
-            tbk_causa.Text = Atual.Causa[0].ToString().ToUpper() + Atual.Causa.Substring(1);
-            tbk_data_entrada.Text = Atual.DataEntrada.ToString("dd/MM/yyyy");
-            dpk_data_saida.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            tbk_causa.Text = txb_causa.Text = Atual.Causa[0].ToString().ToUpper() + Atual.Causa.Substring(1);
+            tbk_data_entrada.Text = dpk_data_entrada.Text = Atual.DataEntrada.ToString("dd/MM/yyyy");
+            dpk_data_saida.Text = (Dialog.Equals(Modo.Alta)) ? DateTime.Now.ToString("dd/MM/yyyy") : Atual.DataSaida.ToString("dd/MM/yyyy");
 
             txb_nota.Text = (string.IsNullOrEmpty(Atual.Nota))
                 ? string.Empty

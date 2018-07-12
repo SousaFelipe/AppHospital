@@ -40,5 +40,12 @@ namespace Controller
                 return new InternacaoData().Atualizar(internacao);
             }
         }
+
+
+
+        public string Remover(int id)
+        {
+            return new InternacaoData().Remover(id);
+        }
     }
 }

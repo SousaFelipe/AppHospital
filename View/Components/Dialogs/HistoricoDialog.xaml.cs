@@ -44,8 +44,12 @@ namespace View.Components.Dialogs
 
             tbk_paciente.Text = paciente.Nome;
 
-            InternacaoViewAdapter adapter = new InternacaoViewAdapter(stp_internacoes);
-            adapter.Dataset = new InternacaoController().Listar(Atual.ID);
+            InternacaoViewAdapter adapter = new InternacaoViewAdapter(stp_internacoes)
+            {
+                Owner = this.Owner,
+                Dataset = new InternacaoController().Listar(Atual.ID)
+            };
+
             adapter.Build();
 
             tbk_nenhuma_in.Visibility = (adapter.Container.Children.Count > 0) ? Visibility.Hidden : Visibility.Visible;
