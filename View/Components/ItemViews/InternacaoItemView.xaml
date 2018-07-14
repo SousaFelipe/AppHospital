@@ -23,7 +23,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/pencil.png"/>
+                        Source="/Resources/pencil.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -33,7 +33,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/delete.png"/>
+                        Source="/Resources/delete.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>

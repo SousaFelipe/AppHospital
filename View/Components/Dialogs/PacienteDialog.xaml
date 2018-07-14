@@ -21,7 +21,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/menu_gray.png"/>
+                        Source="/Resources/menu_gray.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -217,7 +217,7 @@
                         Width="24" Height="24"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Source="/AppHospital;component/Resources/people.png"/>
+                        Source="/Resources/people.png"/>
 
                     <Grid
                         Grid.Column="1"
@@ -295,7 +295,7 @@
                         Width="24" Height="24"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Source="/AppHospital;component/Resources/house.png"/>
+                        Source="/Resources/house.png"/>
 
                     <Grid
                         Grid.Column="1" Grid.Row="0"

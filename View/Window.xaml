@@ -25,7 +25,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/search.png"/>
+                        Source="/Resources/search.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -35,7 +35,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/close.png"/>
+                        Source="/Resources/close.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -45,7 +45,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/menu_vertical.png"/>
+                        Source="/Resources/menu_vertical.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -55,7 +55,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/left_enabled.png"/>
+                        Source="/Resources/left_enabled.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -65,7 +65,7 @@
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/AppHospital;component/Resources/right_enabled.png"/>
+                        Source="/Resources/right_enabled.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -331,7 +331,7 @@
                         Width="24" Height="24"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Source="/AppHospital;component/Resources/plus.png"/>
+                        Source="/Resources/plus.png"/>
 
                 </Grid>
 

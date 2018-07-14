@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Controls;
@@ -21,7 +22,14 @@ namespace View
 
         public Window()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
 
             PageSystem = new Pagination(this)
             {
