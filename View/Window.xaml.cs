@@ -136,5 +136,14 @@ namespace View
         {
             Refresh(txb_pesquisa.Text);
         }
+
+
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+
+            new SuporteDialog(this).Show();
+        }
     }
 }

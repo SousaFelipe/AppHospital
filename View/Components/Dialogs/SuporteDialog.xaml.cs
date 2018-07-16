@@ -4,17 +4,14 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-using Model;
-using Controller;
-
 
 namespace View.Components.Dialogs
 {
-    public partial class NovaInternacaoDialog : UserControl
+    public partial class SuporteDialog : UserControl
     {
         private Window          Owner { get; set; }
         private DispatcherTimer Timer { get; set; }
-        private Paciente        Atual { get; set; }
+        
 
 
 
@@ -28,7 +25,7 @@ namespace View.Components.Dialogs
 
 
 
-        public NovaInternacaoDialog(Window owner)
+        public SuporteDialog(Window owner)
         {
             InitializeComponent();
             Owner = owner;
@@ -36,19 +33,7 @@ namespace View.Components.Dialogs
 
 
 
-        public void Show(Paciente paciente)
-        {
-            Atual = paciente;
-
-            tbk_paciente.Text = paciente.Nome;
-            dpk_data_internacao.Text = DateTime.Now.ToString("dd/MM/yyyy");
-
-            AddToContent();
-        }
-
-
-
-        public void AddToContent()
+        public void Show()
         {
             int colCount = ContentOwner.ColumnDefinitions.Count;
             int rowCount = ContentOwner.RowDefinitions.Count;
@@ -110,19 +95,6 @@ namespace View.Components.Dialogs
 
 
 
-        private bool CamposVazios()
-        {
-            if (string.IsNullOrEmpty(txb_causa.Text))
-                return true;
-
-            if (string.IsNullOrEmpty(dpk_data_internacao.Text))
-                return true;
-
-            return false;
-        }
-
-
-
         private void Grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Hide();
@@ -132,34 +104,7 @@ namespace View.Components.Dialogs
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-
-            if (button.Content.Equals("SALVAR"))
-            {
-                if (CamposVazios())
-                {
-                    MessageBox.Show("Algumas informações importantes não foram adicionadas!", "Ops!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    Internacao internacao = new Internacao()
-                    {
-                        Paciente = Atual.ID,
-                        Causa = txb_causa.Text,
-                        DataEntrada = Convert.ToDateTime(dpk_data_internacao.Text),
-                        DataSaida = DateTime.MinValue,
-                        Nota = txb_nota.Text
-                    };
-
-                    MessageBox.Show(new InternacaoController().Inserir(internacao), "Internação", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Hide();
-                    Owner.Refresh(string.Empty);
-                }
-            }
-            else if (button.Content.Equals("CANCELAR"))
-            {
-                Hide();
-            }
+            Hide();
         }
     }
 }

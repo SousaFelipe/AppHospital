@@ -10,13 +10,13 @@
     Height="600" Width="900"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized" TabIndex="1"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.Foreground="{ DynamicResource MaterialDesignBody }"
     TextElement.FontWeight="Regular"
     TextElement.FontSize="14"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
-    Background="{DynamicResource MaterialDesignPaper}"
-    FontFamily="{DynamicResource MaterialDesignFont}">
+    Background="{ DynamicResource MaterialDesignPaper }"
+    FontFamily="{ DynamicResource MaterialDesignFont }">
 
     <Window.Resources>
         <VisualBrush x:Key="Search">
@@ -39,13 +39,13 @@
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
-        <VisualBrush x:Key="Menu">
+        <VisualBrush x:Key="Support">
             <VisualBrush.Visual>
                 <Grid>
                     <Image
                         VerticalAlignment="Stretch"
                         HorizontalAlignment="Stretch"
-                        Source="/Resources/menu_vertical.png"/>
+                        Source="/Resources/support.png"/>
                 </Grid>
             </VisualBrush.Visual>
         </VisualBrush>
@@ -206,10 +206,8 @@
                             <MenuItem
                                 Width="24"
                                 Height="24"
-                                Background="{ StaticResource Menu }">
-                                <MenuItem x:Name="itm_ajuda" Header="Ajuda" Background="White"/>
-                                <MenuItem x:Name="itm_suporte" Header="Suporte" Background="White"/>
-                            </MenuItem>
+                                Background="{ StaticResource Support }"
+                                Click="MenuItem_Click"/>
                         </Menu>
 
                     </Grid>

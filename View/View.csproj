@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -125,6 +125,9 @@
     <Compile Include="Components\Dialogs\NovoPacienteDialog.xaml.cs">
       <DependentUpon>NovoPacienteDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\Dialogs\SuporteDialog.xaml.cs">
+      <DependentUpon>SuporteDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\ItemViews\InternacaoItemView.xaml.cs">
       <DependentUpon>InternacaoItemView.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Components\Dialogs\SuporteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\ItemViews\InternacaoItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,7 +219,6 @@
     <Resource Include="Resources\history.png" />
     <Resource Include="Resources\menina.png" />
     <Resource Include="Resources\menino.png" />
-    <Resource Include="Resources\menu_vertical.png" />
     <Resource Include="Resources\pencil.png" />
     <Resource Include="Resources\plus.png" />
     <Resource Include="Resources\search.png" />
@@ -242,9 +248,6 @@
     <Resource Include="Resources\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\note_dark.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\cruz.png" />
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +264,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\support.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
