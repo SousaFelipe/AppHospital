@@ -43,10 +43,10 @@ using System.Windows;
 
 // As informações da versão de um assembly consistem nos quatro valores a seguir:
 //
-//      Versão Principal
-//      Versão Secundária 
-//      Número da Versão
-//      Revisão
+//      Versão Principal   1
+//      Versão Secundária  0
+//      Número da Versão   1
+//      Revisão            11
 //
 // É possível especificar todos os valores ou usar como padrão os Números de Build e da Revisão
 // utilizando o "*" como mostrado abaixo:
